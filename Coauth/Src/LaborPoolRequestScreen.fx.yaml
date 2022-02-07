@@ -1,0 +1,1541 @@
+LaborPoolRequestScreen As screen:
+    Fill: =varColorSecondary
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: |-
+        =UpdateContext({showConfirmationModal: false, ResetInputFields: true});
+        NewForm(LaborPoolRequestForm);
+        
+        UpdateContext({currentFacility: If(Len(Param("FacilityID")) = 0,First(MySplashSelectionsCollection).MyFacilityColID,If(Override_Facility_Param = true,First(MySplashSelectionsCollection).MyFacilityColID,GUID(Param("FacilityID"))))});
+        
+        ClearCollect(
+            FacilityLocations,
+            Filter(
+                Locations,
+               Facility.Facility = currentFacility
+            )
+        );
+        
+        If(varTrackingLevel = 'Tracking Level (Apps)'.Location, UpdateContext({selectedLocation: drpLocation_1.Selected}));
+        UpdateContext({
+            varLastSubmitted: 
+                // if location level tracking, show last time for selected location, if the location is selected
+                If(varTrackingLevel = 'Tracking Level (Apps)'.Location,
+                    If(Not(IsBlank(drpLocation_1.Selected)), 
+                        First(Sort(Filter('Labor Pool Requests', Location.Location = drpLocation_1.Selected.Location), 'Created On', Descending))
+                    ),
+                    First(Sort(Filter('Labor Pool Requests', Facility.Facility = currentFacility), 'Created On', Descending))
+                )
+        });
+    Orientation: =If(LaborPoolRequestScreen.Width < LaborPoolRequestScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= LaborPoolRequestScreen.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    Rectangle2 As rectangle:
+        DisabledFill: =Rectangle2.Fill
+        Fill: =RGBA(237, 235, 233, 1)
+        FocusedBorderColor: =Rectangle2.BorderColor
+        Height: =148
+        HoverFill: =Rectangle2.Fill
+        PressedFill: =Rectangle2.Fill
+        Width: =640
+        Y: =988
+        ZIndex: =1
+
+    ScreenHeader_3 As ScreenHeader_1:
+        Title: =ThisAppDisplayName
+        X: =0
+        Y: =0
+        ZIndex: =2
+
+    LaborPoolRequestForm As form:
+        DataSource: ='Labor Pool Requests'
+        Height: =806
+        OnFailure: |+
+            =Notify(LookUp(resourceStrings, TextID = "GenericErrorCompleteAllRequiredFields").TextValue, NotificationType.Error, 2000)
+            
+        OnSuccess: |
+            =UpdateContext({showConfirmationModal: true, ResetInputFields: false});
+            UpdateContext({ResetInputFields: true});
+            
+            UpdateContext({
+                varLastSubmitted: 
+                    // if location level tracking, show last time for selected location, if the location is selected
+                    If(varTrackingLevel = 'Tracking Level (Apps)'.Location,
+                        If(Not(IsBlank(selectedLocation)), 
+                            First(Sort(Filter('Labor Pool Requests', Location.Location = selectedLocation.Location), 'Created On', Descending))
+                        ),
+                        First(Sort(Filter('Labor Pool Requests', Facility.Facility = currentFacility), 'Created On', Descending))
+                    )
+            });
+            
+            ResetForm(LaborPoolRequestForm);
+        Width: =640
+        Y: =lblScreenHeader.Y + lblScreenHeader.Height
+        ZIndex: =3
+
+        Location_DataCard1 As typedDataCard.comboBoxEditCard:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_location"
+            Default: =First(SortByColumns(FacilityLocations, "msft_locationorder"))
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenLocationLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =varTrackingLevel = 'Tracking Level (Apps)'.Location
+            Update: =If(varTrackingLevel = 'Tracking Level (Apps)'.Location, drpLocation_1.Selected)
+            Visible: =varTrackingLevel = 'Tracking Level (Apps)'.Location
+            Width: =640
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            DataCardKey4 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey4.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey4.BorderColor
+                HoverColor: =DataCardKey4.Color
+                HoverFill: =DataCardKey4.Fill
+                PressedBorderColor: =DataCardKey4.BorderColor
+                PressedColor: =DataCardKey4.Color
+                PressedFill: =DataCardKey4.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            ErrorMessage4 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage4.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                Height: =10
+                HoverBorderColor: =ErrorMessage4.BorderColor
+                HoverColor: =ErrorMessage4.Color
+                HoverFill: =ErrorMessage4.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage4.BorderColor
+                PressedColor: =ErrorMessage4.Color
+                PressedFill: =ErrorMessage4.Fill
+                Size: =20
+                Text: =If(!IsBlank(Parent.Error), LookUp(resourceStrings, TextID = "OptionInputError").TextValue)
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =drpLocation_1.Y + drpLocation_1.Height + 10
+                ZIndex: =3
+
+            StarVisible4 As label:
+                Align: =Align.Center
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =StarVisible4.BorderColor
+                Height: =DataCardKey4.Height
+                HoverBorderColor: =StarVisible4.BorderColor
+                HoverColor: =StarVisible4.Color
+                HoverFill: =StarVisible4.Fill
+                PressedBorderColor: =StarVisible4.BorderColor
+                PressedColor: =StarVisible4.Color
+                PressedFill: =StarVisible4.Fill
+                Size: =varFormStyle.Label.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                X: =156
+                Y: =DataCardKey4.Y
+                ZIndex: =4
+
+            drpLocation_1 As dropdown:
+                BorderColor: =RGBA(102, 102, 102, 1)
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(96, 94, 92, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Default: =If(IsBlank(selectedLocation), First(SortByColumns(FacilityLocations, "msft_locationorder")).'Location Name', selectedLocation.'Location Name')
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                FocusedBorderColor: =drpLocation_1.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                Items: =SortByColumns(FacilityLocations, "msft_locationorder")
+                OnChange: |-
+                    =UpdateContext({selectedLocation: drpLocation_1.Selected});
+                    If(varTrackingLevel = 'Tracking Level (Apps)'.Location,
+                        UpdateContext({
+                            varLastSubmitted: 
+                                If(Not(IsBlank(selectedLocation)), 
+                                    First(Sort(Filter('Labor Pool Requests', Location.Location = selectedLocation.Location), 'Created On', Descending)),
+                                    Blank()
+                                )
+                        });
+                    )
+                PaddingBottom: =5
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =RGBA(0, 120, 212, 1)
+                Reset: =ResetInputFields
+                SelectionFill: =RGBA(0, 120, 212, 1)
+                Size: =18
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey4.Y + DataCardKey4.Height + 5
+                ZIndex: =5
+
+        Departments_DataCard1 As typedDataCard.comboBoxEditCard:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_DepartmentName2"
+            Default: =ThisItem.Departments
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDepartmentLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Update: =DataCardValue2.Selected
+            Width: =640
+            X: =0
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey2 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey2.BorderColor
+                FontWeight: =FontWeight.Semibold
+                Height: =38
+                HoverBorderColor: =DataCardKey2.BorderColor
+                HoverColor: =DataCardKey2.Color
+                HoverFill: =DataCardKey2.Fill
+                PressedBorderColor: =DataCardKey2.BorderColor
+                PressedColor: =DataCardKey2.Color
+                PressedFill: =DataCardKey2.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =27
+                Y: =9
+                ZIndex: =1
+
+            DataCardValue2 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["msft_departmentname"]
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue2.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                InputTextPlaceholder: =
+                IsSearchable: =false
+                Items: =Choices([@'Labor Pool Requests'].Departments)
+                MoreItemsButtonColor: =DataCardValue2.ChevronBackground
+                NoSelectionText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDepartmentPlaceholder").TextValue
+                PaddingLeft: =If(DataCardValue2.DisplayMode = DisplayMode.Edit, 10, 0)
+                PressedBorderColor: =DataCardValue2.HoverBorderColor
+                PressedFill: =RGBA(0, 120, 212, 1)
+                SearchFields: =["msft_departmentname"]
+                SearchItems: =[]
+                SelectionTagColor: =DataCardValue2.HoverColor
+                SelectionTagFill: =DataCardValue2.HoverFill
+                SelectMultiple: =false
+                Size: =varFormStyle.Control.Size
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey2.Y + DataCardKey2.Height + 5
+                ZIndex: =2
+
+            ErrorMessage2 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage2.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                Height: =10
+                HoverBorderColor: =ErrorMessage2.BorderColor
+                HoverColor: =ErrorMessage2.Color
+                HoverFill: =ErrorMessage2.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage2.BorderColor
+                PressedColor: =ErrorMessage2.Color
+                PressedFill: =ErrorMessage2.Fill
+                Size: =20
+                Text: =If(!IsBlank(Parent.Error), LookUp(resourceStrings, TextID = "OptionInputError").TextValue)
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue2.Y + DataCardValue2.Height + 10
+                ZIndex: =3
+
+            StarVisible2 As label:
+                Align: =Align.Center
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =StarVisible2.BorderColor
+                Height: =DataCardKey2.Height
+                HoverBorderColor: =StarVisible2.BorderColor
+                HoverColor: =StarVisible2.Color
+                HoverFill: =StarVisible2.Fill
+                PressedBorderColor: =StarVisible2.BorderColor
+                PressedColor: =StarVisible2.Color
+                PressedFill: =StarVisible2.Fill
+                Size: =varFormStyle.Label.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                X: =197
+                Y: =9
+                ZIndex: =4
+
+        "'Department Location_DataCard1' As typedDataCard.textualEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_departmentlocation"
+            Default: =ThisItem.'Department Location'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDepartmentLocationLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Labor Pool Requests'], DataSourceInfo.MaxLength, "msft_departmentlocation")
+            Required: =false
+            Update: =DataCardValue6.Text
+            Width: =640
+            X: =0
+            Y: =2
+            ZIndex: =1
+
+            DataCardKey6 As label:
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey6.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =38
+                HoverBorderColor: =DataCardKey6.BorderColor
+                HoverColor: =DataCardKey6.Color
+                HoverFill: =DataCardKey6.Fill
+                PressedBorderColor: =DataCardKey6.BorderColor
+                PressedColor: =DataCardKey6.Color
+                PressedFill: =DataCardKey6.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue6 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue6.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HintText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDepartmentLocationPlaceholder").TextValue
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =10
+                PressedBorderColor: =DataCardValue6.HoverBorderColor
+                PressedColor: =DataCardValue6.Color
+                PressedFill: =DataCardValue6.Fill
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =varFormStyle.Control.Size
+                TabIndex: =2
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey6.Y + DataCardKey6.Height + 5
+                ZIndex: =2
+
+            ErrorMessage6 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage6.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage6.BorderColor
+                HoverColor: =ErrorMessage6.Color
+                HoverFill: =ErrorMessage6.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage6.BorderColor
+                PressedColor: =ErrorMessage6.Color
+                PressedFill: =ErrorMessage6.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue6.Y + DataCardValue6.Height
+                ZIndex: =3
+
+            StarVisible6 As label:
+                Align: =Align.Center
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =StarVisible6.BorderColor
+                Height: =DataCardKey6.Height
+                HoverBorderColor: =StarVisible6.BorderColor
+                HoverColor: =StarVisible6.Color
+                HoverFill: =StarVisible6.Fill
+                PressedBorderColor: =StarVisible6.BorderColor
+                PressedColor: =StarVisible6.Color
+                PressedFill: =StarVisible6.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey6.Y
+                ZIndex: =4
+
+        "'Request Type_DataCard1' As typedDataCard.comboBoxOptionSetSingleEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_requesttype"
+            Default: =ThisItem.'Request Type'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenRequestTypeLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Update: =DataCardValue7.Selected.Value
+            Width: =640
+            X: =0
+            Y: =3
+            ZIndex: =1
+
+            DataCardKey7 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey7.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey7.BorderColor
+                HoverColor: =DataCardKey7.Color
+                HoverFill: =DataCardKey7.Fill
+                PressedBorderColor: =DataCardKey7.BorderColor
+                PressedColor: =DataCardKey7.Color
+                PressedFill: =DataCardKey7.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue7 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                DefaultSelectedItems: =[Parent.Default]
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue7.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                IsSearchable: =false
+                Items: =Choices(ThisItem.'Request Type')
+                MoreItemsButtonColor: =DataCardValue7.ChevronBackground
+                NoSelectionText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenRequestTypePlaceholder").TextValue
+                PaddingLeft: =If(DataCardValue7.DisplayMode = DisplayMode.Edit, 10, 0)
+                PressedBorderColor: =DataCardValue7.HoverBorderColor
+                PressedFill: =RGBA(0, 120, 212, 1)
+                SearchItems: =[]
+                SelectionTagColor: =DataCardValue7.HoverColor
+                SelectionTagFill: =DataCardValue7.HoverFill
+                SelectMultiple: =false
+                Size: =varFormStyle.Control.Size
+                TabIndex: =3
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey7.Y + DataCardKey7.Height + 5
+                ZIndex: =2
+
+            ErrorMessage7 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage7.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                Height: =10
+                HoverBorderColor: =ErrorMessage7.BorderColor
+                HoverColor: =ErrorMessage7.Color
+                HoverFill: =ErrorMessage7.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage7.BorderColor
+                PressedColor: =ErrorMessage7.Color
+                PressedFill: =ErrorMessage7.Fill
+                Size: =20  
+                Text: =If(!IsBlank(Parent.Error), LookUp(resourceStrings, TextID = "OptionInputError").TextValue)
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue7.Y + DataCardValue7.Height + 10
+                ZIndex: =3
+
+            StarVisible7 As label:
+                Align: =Align.Center
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =StarVisible7.BorderColor
+                Height: =DataCardKey7.Height
+                HoverBorderColor: =StarVisible7.BorderColor
+                HoverColor: =StarVisible7.Color
+                HoverFill: =StarVisible7.Fill
+                PressedBorderColor: =StarVisible7.BorderColor
+                PressedColor: =StarVisible7.Color
+                PressedFill: =StarVisible7.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                X: =222
+                Y: =10
+                ZIndex: =4
+
+        "'Request Role_DataCard1' As typedDataCard.comboBoxEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_RequestRole"
+            Default: =ThisItem.'Request Role'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenRoleNeededLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue8.Selected
+            Width: =640
+            X: =0
+            Y: =4
+            ZIndex: =1
+
+            DataCardKey8 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey8.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey8.BorderColor
+                HoverColor: =DataCardKey8.Color
+                HoverFill: =DataCardKey8.Fill
+                PressedBorderColor: =DataCardKey8.BorderColor
+                PressedColor: =DataCardKey8.Color
+                PressedFill: =DataCardKey8.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue8 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["msft_name"]
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue8.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                IsSearchable: =false
+                Items: =Choices([@'Labor Pool Requests'].'Request Role')
+                MoreItemsButtonColor: =DataCardValue8.ChevronBackground
+                NoSelectionText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenRoleNeededPlaceholder").TextValue
+                PaddingLeft: =If(DataCardValue8.DisplayMode = DisplayMode.Edit, 10, 0)
+                PressedBorderColor: =DataCardValue8.HoverBorderColor
+                PressedFill: =RGBA(0, 120, 212, 1)
+                SearchFields: =["msft_name"]
+                SearchItems: =[]
+                SelectionTagColor: =DataCardValue8.HoverColor
+                SelectionTagFill: =DataCardValue8.HoverFill
+                SelectMultiple: =false
+                Size: =varFormStyle.Control.Size
+                TabIndex: =4
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey8.Y + DataCardKey8.Height + 5
+                ZIndex: =2
+
+            ErrorMessage8 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage8.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage8.BorderColor
+                HoverColor: =ErrorMessage8.Color
+                HoverFill: =ErrorMessage8.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage8.BorderColor
+                PressedColor: =ErrorMessage8.Color
+                PressedFill: =ErrorMessage8.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue8.Y + DataCardValue8.Height
+                ZIndex: =3
+
+            StarVisible8 As label:
+                Align: =Align.Center
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =StarVisible8.BorderColor
+                Height: =DataCardKey8.Height
+                HoverBorderColor: =StarVisible8.BorderColor
+                HoverColor: =StarVisible8.Color
+                HoverFill: =StarVisible8.Fill
+                PressedBorderColor: =StarVisible8.BorderColor
+                PressedColor: =StarVisible8.Color
+                PressedFill: =StarVisible8.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey8.Y
+                ZIndex: =4
+
+        "'Other Request Role_DataCard1' As typedDataCard.textualEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_otherrequestrole"
+            Default: =ThisItem.'Other Request Role'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenOtherRequestRoleLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            MaxLength: =DataSourceInfo([@'Labor Pool Requests'], DataSourceInfo.MaxLength, "msft_otherrequestrole")
+            Required: =false
+            Update: =If(DataCardValue13.Visible, DataCardValue13.Text, "")
+            Visible: =DataCardValue8.Selected.Name = "Other"
+            Width: =640
+            X: =0
+            Y: =5
+            ZIndex: =1
+
+            DataCardKey13 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey13.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey13.BorderColor
+                HoverColor: =DataCardKey13.Color
+                HoverFill: =DataCardKey13.Fill
+                PressedBorderColor: =DataCardKey13.BorderColor
+                PressedColor: =DataCardKey13.Color
+                PressedFill: =DataCardKey13.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue13 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue13.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                MaxLength: =Parent.MaxLength
+                PaddingLeft: =5
+                PressedBorderColor: =DataCardValue13.HoverBorderColor
+                PressedColor: =DataCardValue13.Color
+                PressedFill: =DataCardValue13.Fill
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =varFormStyle.Control.Size
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey13.Y + DataCardKey13.Height + 5
+                ZIndex: =2
+
+            ErrorMessage13 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage13.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage13.BorderColor
+                HoverColor: =ErrorMessage13.Color
+                HoverFill: =ErrorMessage13.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage13.BorderColor
+                PressedColor: =ErrorMessage13.Color
+                PressedFill: =ErrorMessage13.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue13.Y + DataCardValue13.Height
+                ZIndex: =3
+
+            StarVisible13 As label:
+                Align: =Align.Center
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =StarVisible13.BorderColor
+                Height: =DataCardKey13.Height
+                HoverBorderColor: =StarVisible13.BorderColor
+                HoverColor: =StarVisible13.Color
+                HoverFill: =StarVisible13.Fill
+                PressedBorderColor: =StarVisible13.BorderColor
+                PressedColor: =StarVisible13.Color
+                PressedFill: =StarVisible13.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =false
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey13.Y
+                ZIndex: =4
+
+        "'Resource needed for_DataCard1' As typedDataCard.comboBoxOptionSetSingleEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_resourceneededfor"
+            Default: =ThisItem.'Resource needed for'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenNeededTimeLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue1.Selected.Value
+            Width: =640
+            X: =0
+            Y: =6
+            ZIndex: =1
+
+            DataCardKey1 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey1.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =30
+                HoverBorderColor: =DataCardKey1.BorderColor
+                HoverColor: =DataCardKey1.Color
+                HoverFill: =DataCardKey1.Fill
+                PressedBorderColor: =DataCardKey1.BorderColor
+                PressedColor: =DataCardKey1.Color
+                PressedFill: =DataCardKey1.Fill
+                Size: =16
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue1 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                DefaultSelectedItems: =[Parent.Default]
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue1.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                IsSearchable: =false
+                Items: =Choices('Resource needed for (Labor Pool Requests)')
+                MoreItemsButtonColor: =DataCardValue1.ChevronBackground
+                NoSelectionText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenNeededTimePlaceholder").TextValue
+                PaddingLeft: =If(DataCardValue1.DisplayMode = DisplayMode.Edit, 10, 0)
+                PressedBorderColor: =DataCardValue1.HoverBorderColor
+                PressedFill: =RGBA(0, 120, 212, 1)
+                SearchItems: =[]
+                SelectionTagColor: =DataCardValue1.HoverColor
+                SelectionTagFill: =DataCardValue1.HoverFill
+                SelectMultiple: =false
+                Size: =varFormStyle.Control.Size
+                TabIndex: =5
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey1.Y + DataCardKey1.Height + 5
+                ZIndex: =2
+
+            ErrorMessage1 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage1.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage1.BorderColor
+                HoverColor: =ErrorMessage1.Color
+                HoverFill: =ErrorMessage1.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage1.BorderColor
+                PressedColor: =ErrorMessage1.Color
+                PressedFill: =ErrorMessage1.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue1.Y + DataCardValue1.Height
+                ZIndex: =3
+
+            StarVisible1 As label:
+                Align: =Align.Center
+                FocusedBorderColor: =StarVisible1.BorderColor
+                Height: =DataCardKey1.Height
+                HoverBorderColor: =StarVisible1.BorderColor
+                HoverColor: =StarVisible1.Color
+                HoverFill: =StarVisible1.Fill
+                PressedBorderColor: =StarVisible1.BorderColor
+                PressedColor: =StarVisible1.Color
+                PressedFill: =StarVisible1.Fill
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey1.Y
+                ZIndex: =4
+
+        Quantity_DataCard1 As typedDataCard.numberEditCard:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_quantity"
+            Default: =ThisItem.Quantity
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenQuantityLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =183
+            Required: =true
+            Update: =Value(DataCardValue3.Text)
+            Width: =640
+            X: =0
+            Y: =7
+            ZIndex: =1
+
+            DataCardKey3 As label:
+                AutoHeight: =true
+                Color: =RGBA(0, 0, 0, 1)
+                FocusedBorderColor: =DataCardKey3.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey3.BorderColor
+                HoverColor: =DataCardKey3.Color
+                HoverFill: =DataCardKey3.Fill
+                PressedBorderColor: =DataCardKey3.BorderColor
+                PressedColor: =DataCardKey3.Color
+                PressedFill: =DataCardKey3.Fill
+                Size: =16
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue3 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue3.BorderColor
+                Format: =TextFormat.Number
+                Height: =80
+                HintText: =""
+                PaddingLeft: =10
+                PressedBorderColor: =DataCardValue3.HoverBorderColor
+                PressedColor: =DataCardValue3.Color
+                PressedFill: =DataCardValue3.Fill
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =18
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey3.Y + DataCardKey3.Height + 5
+                ZIndex: =2
+
+            ErrorMessage3 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage3.BorderColor
+                FontWeight: =FontWeight.Normal
+                Height: =10
+                HoverBorderColor: =ErrorMessage3.BorderColor
+                HoverColor: =ErrorMessage3.Color
+                HoverFill: =ErrorMessage3.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage3.BorderColor
+                PressedColor: =ErrorMessage3.Color
+                PressedFill: =ErrorMessage3.Fill
+                Size: =20
+                Text: =If(!IsBlank(Parent.Error), LookUp(resourceStrings, TextID = "NumberInputError").TextValue)
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue3.Y + DataCardValue3.Height + 10
+                ZIndex: =3
+
+            StarVisible3 As label:
+                Align: =Align.Center
+                Color: =RGBA(255, 0, 0, 1)
+                FocusedBorderColor: =StarVisible3.BorderColor
+                Height: =DataCardKey3.Height
+                HoverBorderColor: =StarVisible3.BorderColor
+                HoverColor: =StarVisible3.Color
+                HoverFill: =StarVisible3.Fill
+                PressedBorderColor: =StarVisible3.BorderColor
+                PressedColor: =StarVisible3.Color
+                PressedFill: =StarVisible3.Fill
+                Size: =21
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                X: =144
+                Y: =10
+                ZIndex: =4
+
+            lblprev As label:
+                Color: =RGBA(117, 117, 122, 1)
+                Height: =27
+                Size: =16
+                Text: =LookUp(resourceStrings, TextID = "PreviousValueText").TextValue
+                Width: =380
+                X: =30
+                Y: =143
+                ZIndex: =5
+
+            lblprevval As label:
+                Color: =RGBA(117, 117, 122, 1)
+                Height: =lblprev.Height
+                Size: =16
+                Text: =varLastSubmitted.Quantity
+                Width: =263
+                X: =lblprev.X + lblprev.Width + 7
+                Y: =lblprev.Y
+                ZIndex: =6
+
+        Description_DataCard1 As typedDataCard.textualMultiLineEditCard:
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_description"
+            Default: =ThisItem.Description
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDetailsLabel").TextValue
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =DataCardValue10.Text
+            Width: =640
+            X: =0
+            Y: =8
+            ZIndex: =1
+
+            DataCardKey10 As label:
+                AutoHeight: =true
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =DataCardKey10.BorderColor
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey10.BorderColor
+                HoverColor: =DataCardKey10.Color
+                HoverFill: =DataCardKey10.Fill
+                PressedBorderColor: =DataCardKey10.BorderColor
+                PressedColor: =DataCardKey10.Color
+                PressedFill: =DataCardKey10.Fill
+                Size: =varFormStyle.Label.Size
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =12
+                ZIndex: =1
+
+            DataCardValue10 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue10.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =160
+                HintText: =LookUp(resourceStrings, TextID = "StaffingNeedsScreenDetailsPlaceholder").TextValue
+                Mode: =TextMode.MultiLine
+                PaddingLeft: =10
+                PressedBorderColor: =DataCardValue10.HoverBorderColor
+                PressedColor: =DataCardValue10.Color
+                PressedFill: =DataCardValue10.Fill
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =varFormStyle.Control.Size
+                TabIndex: =7
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey10.Y + DataCardKey10.Height + 5
+                ZIndex: =2
+
+            ErrorMessage11 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage11.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage11.BorderColor
+                HoverColor: =ErrorMessage11.Color
+                HoverFill: =ErrorMessage11.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage11.BorderColor
+                PressedColor: =ErrorMessage11.Color
+                PressedFill: =ErrorMessage11.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue10.Y + DataCardValue10.Height
+                ZIndex: =3
+
+            StarVisible11 As label:
+                Align: =Align.Center
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =StarVisible11.BorderColor
+                Height: =DataCardKey10.Height
+                HoverBorderColor: =StarVisible11.BorderColor
+                HoverColor: =StarVisible11.Color
+                HoverFill: =StarVisible11.Fill
+                PressedBorderColor: =StarVisible11.BorderColor
+                PressedColor: =StarVisible11.Color
+                PressedFill: =StarVisible11.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey10.Y
+                ZIndex: =4
+
+        Facility_DataCard1 As typedDataCard.comboBoxEditCard:
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_Facility"
+            Default: =ThisItem.Facility
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: ="Facility"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =false
+            Update: =LookUp(Facilities,Facility = If(Len(Param("FacilityID")) = 0,First(MySplashSelectionsCollection).MyFacilityColID,If(Override_Facility_Param = true,First(MySplashSelectionsCollection).MyFacilityColID,GUID(Param("FacilityID")))))
+            Visible: =false
+            Width: =640
+            X: =0
+            Y: =9
+            ZIndex: =1
+
+            DataCardKey14 As label:
+                AutoHeight: =true
+                FocusedBorderColor: =DataCardKey14.BorderColor
+                Height: =48
+                HoverBorderColor: =DataCardKey14.BorderColor
+                HoverColor: =DataCardKey14.Color
+                HoverFill: =DataCardKey14.Fill
+                PressedBorderColor: =DataCardKey14.BorderColor
+                PressedColor: =DataCardKey14.Color
+                PressedFill: =DataCardKey14.Fill
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue14 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                DefaultSelectedItems: =Parent.Default
+                DisplayFields: =["msft_facilityname"]
+                DisplayMode: =Parent.DisplayMode
+                FocusedBorderColor: =DataCardValue14.BorderColor
+                Height: =70
+                HoverBorderColor: =ColorFade(DataCardValue14.BorderColor, 15%)
+                IsSearchable: =false
+                Items: =LookUp(Facilities,Facility = If(Len(Param("FacilityID")) = 0,First(MySplashSelectionsCollection).MyFacilityColID,If(Override_Facility_Param = true,First(MySplashSelectionsCollection).MyFacilityColID,GUID(Param("FacilityID")))))
+                MoreItemsButtonColor: =DataCardValue14.ChevronBackground
+                PaddingLeft: =If(DataCardValue14.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedBorderColor: =DataCardValue14.HoverBorderColor
+                SearchFields: =["msft_facilityname"]
+                SearchItems: =[]
+                SelectionTagColor: =DataCardValue14.HoverColor
+                SelectionTagFill: =DataCardValue14.HoverFill
+                SelectMultiple: =false
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey14.Y + DataCardKey14.Height + 5
+                ZIndex: =2
+
+            ErrorMessage14 As label:
+                AutoHeight: =true
+                Color: =RGBA(255, 255, 0, 1)
+                FocusedBorderColor: =ErrorMessage14.BorderColor
+                Height: =10
+                HoverBorderColor: =ErrorMessage14.BorderColor
+                HoverColor: =ErrorMessage14.Color
+                HoverFill: =ErrorMessage14.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage14.BorderColor
+                PressedColor: =ErrorMessage14.Color
+                PressedFill: =ErrorMessage14.Fill
+                Size: =varFormStyle.Control.Size
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue14.Y + DataCardValue14.Height
+                ZIndex: =3
+
+            StarVisible14 As label:
+                Align: =Align.Center
+                Color: =varFormStyle.Label.Color
+                FocusedBorderColor: =StarVisible14.BorderColor
+                Height: =DataCardKey14.Height
+                HoverBorderColor: =StarVisible14.BorderColor
+                HoverColor: =StarVisible14.Color
+                HoverFill: =StarVisible14.Fill
+                PressedBorderColor: =StarVisible14.BorderColor
+                PressedColor: =StarVisible14.Color
+                PressedFill: =StarVisible14.Fill
+                Size: =varFormStyle.Control.Size
+                Text: ="*"
+                Visible: =And(Parent.Required, Parent.DisplayMode=DisplayMode.Edit)
+                Width: =30
+                Wrap: =false
+                Y: =DataCardKey14.Y
+                ZIndex: =4
+
+    Icon1_2 As icon.ArrowLeft:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Color: =RGBA(0, 75, 28, 1)
+        DisabledFill: =Icon1_2.Fill
+        FocusedBorderColor: =Icon1_2.BorderColor
+        Height: =40
+        HoverBorderColor: =ColorFade(Icon1_2.BorderColor, 20%)
+        HoverColor: =ColorFade(Icon1_2.Color, 20%)
+        HoverFill: =Icon1_2.Fill
+        Icon: =Icon.ArrowLeft
+        OnSelect: |-
+            =ResetForm(LaborPoolRequestForm);
+            NewForm(LaborPoolRequestForm);
+            Navigate(
+                HomeScreen,
+                LookUp(
+                    colStyles,
+                    Key = "navigation_transition"
+                ).Value
+            )
+        PressedBorderColor: =ColorFade(Icon1_2.BorderColor, -20%)
+        PressedColor: =ColorFade(Icon1_2.Color, -20%)
+        PressedFill: =Icon1_2.Fill
+        Width: =40
+        X: =30
+        Y: =ScreenHeader_3.Y + (ScreenHeader_3.Height - Icon1_2.Height)/2
+        ZIndex: =4
+
+    lblScreenHeader As label:
+        FocusedBorderColor: =lblScreenHeader.BorderColor
+        FontWeight: =FontWeight.Semibold
+        Height: =50
+        HoverBorderColor: =lblScreenHeader.BorderColor
+        HoverColor: =lblScreenHeader.Color
+        HoverFill: =lblScreenHeader.Fill
+        PressedBorderColor: =lblScreenHeader.BorderColor
+        PressedColor: =lblScreenHeader.Color
+        PressedFill: =lblScreenHeader.Fill
+        Size: =18
+        Text: ="Report labor needs"
+        Visible: =false
+        Width: =275
+        X: =40
+        Y: =ScreenHeader_3.Y + ScreenHeader_3.Height + 19
+        ZIndex: =5
+
+    Me_Feedback_Icon_1 As image:
+        FocusedBorderColor: =Me_Feedback_Icon_1.BorderColor
+        Height: =69
+        HoverBorderColor: =ColorFade(Me_Feedback_Icon_1.BorderColor, 20%)
+        HoverFill: =ColorFade(Me_Feedback_Icon_1.Fill, 20%)
+        Image: =Feedback_Green
+        OnSelect: =Navigate(FeedbackScreen,Fade)
+        PressedBorderColor: =ColorFade(Me_Feedback_Icon_1.BorderColor, -20%)
+        PressedFill: =ColorFade(Me_Feedback_Icon_1.Fill, -20%)
+        Width: =68
+        X: =555
+        Y: =9
+        ZIndex: =6
+
+    Icon1_3 As icon.Waypoint:
+        Color: =varColorPrimary
+        DisabledFill: =Icon1_3.Fill
+        FocusedBorderColor: =Icon1_3.BorderColor
+        Height: =30
+        HoverBorderColor: =ColorFade(Icon1_3.BorderColor, 20%)
+        HoverColor: =ColorFade(Icon1_3.Color, 20%)
+        HoverFill: =Icon1_3.Fill
+        Icon: =Icon.Waypoint
+        OnSelect: =Navigate(SplashScreen,Fade)
+        PressedBorderColor: =ColorFade(Icon1_3.BorderColor, -20%)
+        PressedColor: =ColorFade(Icon1_3.Color, -20%)
+        PressedFill: =Icon1_3.Fill
+        Width: =30
+        X: =lblFacility_3.X - Icon1_3.Width
+        Y: =lblFacility_3.Y + 5
+        ZIndex: =7
+
+    lblFacility_3 As label:
+        Align: =Left
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =lblFacility_3.BorderColor
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =Semibold
+        Height: =50
+        HoverBorderColor: =lblFacility_3.BorderColor
+        HoverColor: =lblFacility_3.Color
+        HoverFill: =lblFacility_3.Fill
+        OnSelect: =Navigate(SplashScreen,Fade)
+        PressedBorderColor: =lblFacility_3.BorderColor
+        PressedColor: =lblFacility_3.Color
+        PressedFill: =lblFacility_3.Fill
+        Size: =14
+        Text: =If(IsBlank(ParamFacility),First(MySplashSelectionsCollection).MyFacilityCol,If(Override_Facility_Param = true,First(MySplashSelectionsCollection).MyFacilityCol,ParamFacility))
+        Width: =200
+        X: =App.DesignWidth - lblFacility_3.Width - 15
+        Y: =lblScreenHeader.Y
+        ZIndex: =8
+
+    Telemetry As image:
+        FocusedBorderColor: =Telemetry.BorderColor
+        Height: =20
+        HoverBorderColor: =ColorFade(Telemetry.BorderColor, 20%)
+        HoverFill: =ColorFade(Telemetry.Fill, 20%)
+        Image: |-
+            ="https://web.powerapps.com/pixeltag/emergency-response/staffingneeds"
+        PressedBorderColor: =ColorFade(Telemetry.BorderColor, -20%)
+        PressedFill: =ColorFade(Telemetry.Fill, -20%)
+        Width: =20
+        X: =5
+        Y: =5
+        ZIndex: =9
+
+    btnAction_18 As button:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderStyle: =Solid
+        BorderThickness: =0
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        Fill: =varColorPrimary
+        FocusedBorderColor: =btnAction_18.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Normal
+        Height: =80
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =btnAction_18.Color
+        HoverFill: =ColorFade(btnAction_18.Fill, -10%)
+        OnSelect: |-
+            =Trace(
+                "Labor Pool Request: Submit Request Button",
+                TraceSeverity.Information
+            );
+            
+            SubmitForm(LaborPoolRequestForm);
+        PressedBorderColor: =ColorFade(btnAction_18.BorderColor, -50%)
+        PressedColor: =btnAction_18.Color
+        PressedFill: =ColorFade(btnAction_18.Fill, -30%)
+        RadiusBottomLeft: =btnAction_18.RadiusTopLeft
+        RadiusBottomRight: =btnAction_18.RadiusTopLeft
+        RadiusTopLeft: =5
+        RadiusTopRight: =btnAction_18.RadiusTopLeft
+        Size: =22
+        Text: =LookUp(resourceStrings, TextID = "SubmitButtonText").TextValue
+        Width: =Parent.Width - 80
+        X: =(Parent.Width-btnAction_18.Width)/2
+        Y: =1015
+        ZIndex: =10
+
+    lbl_last_submitted As label:
+        Align: =Align.Center
+        FocusedBorderColor: =lbl_last_submitted.BorderColor
+        Height: =41
+        HoverBorderColor: =lbl_last_submitted.BorderColor
+        HoverColor: =lbl_last_submitted.Color
+        HoverFill: =lbl_last_submitted.Fill
+        PressedBorderColor: =lbl_last_submitted.BorderColor
+        PressedColor: =lbl_last_submitted.Color
+        PressedFill: =lbl_last_submitted.Fill
+        Size: =14
+        Text: |
+            =If(IsBlank(varLastSubmitted), 
+                LookUp(resourceStrings, TextID = "NotYetSubmittedText").TextValue, 
+                Substitute(Substitute(LookUp(resourceStrings, TextID = "LastSubmittedByText").TextValue, "<Time stamp>", Text(varLastSubmitted.'Created On', ShortTime) & " " & Text(varLastSubmitted.'Created On', ShortDate) & " "), "<Full Name>", varLastSubmitted.'Created By'.'Full Name'))
+        Width: =Parent.Width
+        X: =(Parent.Width-lbl_last_submitted.Width)/2
+        Y: =1095
+        ZIndex: =18
+
+    Group1 As group:
+        Height: =5
+        Width: =5
+        X: =100
+        Y: =100
+        ZIndex: =18
+
+        confScreenOverlay As rectangle:
+            DisabledFill: =confScreenOverlay.Fill
+            Fill: =RGBA(59, 58, 57, 0.4)
+            FocusedBorderColor: =confScreenOverlay.BorderColor
+            Height: =Parent.Height
+            HoverFill: =confScreenOverlay.Fill
+            PressedFill: =confScreenOverlay.Fill
+            Visible: =showConfirmationModal
+            Width: =Parent.Width
+            ZIndex: =11
+
+        confScreenModal As rectangle:
+            DisabledFill: =confScreenModal.Fill
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =confScreenModal.BorderColor
+            Height: =If(varTrackingLevel = 'Tracking Level (Apps)'.Location, 701, 604)
+            HoverFill: =confScreenModal.Fill
+            PressedFill: =confScreenModal.Fill
+            Visible: =showConfirmationModal
+            Width: =confScreenOverlay.Width - 80
+            X: =40
+            Y: =confScreenOverlay.Y + 125
+            ZIndex: =12
+
+        lblConfScreenTitle As label:
+            Align: =Align.Center
+            FocusedBorderColor: =lblConfScreenTitle.BorderColor
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =70
+            HoverBorderColor: =lblConfScreenTitle.BorderColor
+            HoverColor: =lblConfScreenTitle.Color
+            HoverFill: =lblConfScreenTitle.Fill
+            PressedBorderColor: =lblConfScreenTitle.BorderColor
+            PressedColor: =lblConfScreenTitle.Color
+            PressedFill: =lblConfScreenTitle.Fill
+            Size: =24
+            Text: =Substitute(LookUp(resourceStrings, TextID = "ConfirmationScreenTitle").TextValue, "<App name>", ThisAppDisplayName)
+            Visible: =showConfirmationModal
+            Width: =confScreenModal.Width
+            X: =40
+            Y: =confScreenImage.Y + confScreenImage.Height + 25
+            ZIndex: =13
+
+        lblConfScreenMessage As label:
+            Align: =Align.Center
+            FocusedBorderColor: =lblConfScreenMessage.BorderColor
+            Height: =70
+            HoverBorderColor: =lblConfScreenMessage.BorderColor
+            HoverColor: =lblConfScreenMessage.Color
+            HoverFill: =lblConfScreenMessage.Fill
+            PressedBorderColor: =lblConfScreenMessage.BorderColor
+            PressedColor: =lblConfScreenMessage.Color
+            PressedFill: =lblConfScreenMessage.Fill
+            Size: =17
+            Text: =LookUp(resourceStrings, TextID = "ConfirmationScreenSubtitle").TextValue
+            Visible: =showConfirmationModal
+            Width: =confScreenModal.Width
+            X: =40
+            Y: =lblConfScreenTitle.Y + lblConfScreenTitle.Height
+            ZIndex: =14
+
+        btnTrackAnother As button:
+            BorderColor: =varColorPrimary
+            BorderStyle: =Solid
+            BorderThickness: =1
+            Color: =varColorPrimary
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =btnTrackAnother.BorderColor
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =80
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =btnTrackAnother.Color
+            HoverFill: =ColorFade(btnTrackAnother.Fill, -10%)
+            OnSelect: |-
+                =Trace(
+                    "Labor Pool Request: Confirmation Screen Track Another Button",
+                    TraceSeverity.Information
+                );
+                NewForm(LaborPoolRequestForm);
+                UpdateContext({showConfirmationModal: false});
+            PressedBorderColor: =ColorFade(btnTrackAnother.BorderColor, -50%)
+            PressedColor: =btnTrackAnother.Color
+            PressedFill: =ColorFade(btnTrackAnother.Fill, -30%)
+            RadiusBottomLeft: =btnTrackAnother.RadiusTopLeft
+            RadiusBottomRight: =btnTrackAnother.RadiusTopLeft
+            RadiusTopLeft: =5
+            RadiusTopRight: =btnTrackAnother.RadiusTopLeft
+            Size: =22
+            Text: =LookUp(resourceStrings, TextID = "ConfirmationScreenTrackAnotherButtonText").TextValue
+            Visible: =If(showConfirmationModal && varTrackingLevel = 'Tracking Level (Apps)'.Location, true, false)
+            Width: =confScreenModal.Width - 80
+            X: =confScreenModal.X + 40
+            Y: =btnHome.Y + btnHome.Height + 25
+            ZIndex: =15
+
+        btnHome As button:
+            BorderColor: =varColorPrimary
+            BorderStyle: =Solid
+            BorderThickness: =1
+            DisabledBorderColor: =RGBA(0, 0, 0, 0)
+            Fill: =varColorPrimary
+            FocusedBorderColor: =btnHome.BorderColor
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =80
+            HoverBorderColor: =RGBA(0, 0, 0, 0)
+            HoverColor: =btnHome.Color
+            HoverFill: =ColorFade(btnHome.Fill, -10%)
+            OnSelect: |+
+                =Trace(
+                    "Labor Pool Request: Confirmation Screen Home Button",
+                    TraceSeverity.Information
+                );
+                UpdateContext({showConfirmationModal: false});
+                Navigate(HomeScreen, ScreenTransition.None);
+                
+            PressedBorderColor: =ColorFade(btnHome.BorderColor, -50%)
+            PressedColor: =btnHome.Color
+            PressedFill: =ColorFade(btnHome.Fill, -30%)
+            RadiusBottomLeft: =btnHome.RadiusTopLeft
+            RadiusBottomRight: =btnHome.RadiusTopLeft
+            RadiusTopLeft: =5
+            RadiusTopRight: =btnHome.RadiusTopLeft
+            Size: =22
+            Text: =LookUp(resourceStrings, TextID = "ConfirmationScreenHomeButtonText").TextValue
+            Visible: =showConfirmationModal
+            Width: =confScreenModal.Width - 80
+            X: =confScreenModal.X + 40
+            Y: =lblConfScreenMessage.Y + lblConfScreenMessage.Height + 25
+            ZIndex: =16
+
+        confScreenImage As image:
+            FocusedBorderColor: =confScreenImage.BorderColor
+            Height: =273
+            HoverBorderColor: =ColorFade(confScreenImage.BorderColor, 20%)
+            HoverFill: =ColorFade(confScreenImage.Fill, 20%)
+            Image: =ConfirmationScreenImage
+            PressedBorderColor: =ColorFade(confScreenImage.BorderColor, -20%)
+            PressedFill: =ColorFade(confScreenImage.Fill, -20%)
+            Visible: =showConfirmationModal
+            Width: =confScreenModal.Width - 40
+            X: =confScreenModal.X + 20
+            Y: =confScreenModal.Y + 30
+            ZIndex: =17
+

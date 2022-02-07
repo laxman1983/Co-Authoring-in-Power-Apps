@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_canvasappstringvalues",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_canvasappstringvalue",
+    "MaxGetRowsCount": 500,
+    "Name": "Canvas App String Values",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_canvasappstring": "TextID",
+      "msft_canvasappstringvalue_AsyncOperations": "System Jobs",
+      "msft_canvasappstringvalue_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_canvasappstringvalue_DuplicateBaseRecord": "Duplicate Records (msft_canvasappstringvalue_DuplicateBaseRecord)",
+      "msft_canvasappstringvalue_DuplicateMatchingRecord": "Duplicate Records (msft_canvasappstringvalue_DuplicateMatchingRecord)",
+      "msft_canvasappstringvalue_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_canvasappstringvalue_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_canvasappstringvalue_ProcessSession": "Process Sessions",
+      "msft_canvasappstringvalue_SyncErrors": "Sync Errors",
+      "msft_canvasappstringvalueid": "Canvas App String Value",
+      "msft_defaulttext": "Default Text",
+      "msft_languagetag": "Language Tag",
+      "msft_overridetext": "Override Text",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Canvas App String Values",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Canvas App String Values (Views)",
+    "Name": "_msft_canvasappstringvalue_views",
+    "RelatedEntityName": "Canvas App String Values",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "0d27901e-6315-47a1-9694-8b8a8ed7b0a4": "Canvas App String Value Advanced Find View",
+      "6d21a6da-8ce1-46a8-ac8a-675d91170736": "Canvas App String Value Associated View",
+      "c58e3f1d-168e-40a9-b7b7-3ab2b2c2d1cc": "Canvas App String Value Lookup View",
+      "d2ac3dd3-bd01-42dd-b885-cdaf38c0d16c": "Active Canvas App String Values",
+      "fe8a2dac-0a53-49cd-a116-6aa2bb4d84ed": "Inactive Canvas App String Values"
+    }
+  },
+  {
+    "DisplayName": "Status (Canvas App String Values)",
+    "Name": "msft_canvasappstringvalue_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Canvas App String Values"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Canvas App String Values",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Canvas App String Values)",
+    "Name": "msft_canvasappstringvalue_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Canvas App String Values"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Canvas App String Values",
+    "Type": "OptionSetInfo"
+  }
+]

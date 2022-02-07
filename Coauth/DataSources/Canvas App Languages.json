@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_canvasapplanguages",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_canvasapplanguage",
+    "MaxGetRowsCount": 500,
+    "Name": "Canvas App Languages",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_canvasapplanguage_AsyncOperations": "System Jobs",
+      "msft_canvasapplanguage_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_canvasapplanguage_DuplicateBaseRecord": "Duplicate Records (msft_canvasapplanguage_DuplicateBaseRecord)",
+      "msft_canvasapplanguage_DuplicateMatchingRecord": "Duplicate Records (msft_canvasapplanguage_DuplicateMatchingRecord)",
+      "msft_canvasapplanguage_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_canvasapplanguage_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_canvasapplanguage_ProcessSession": "Process Sessions",
+      "msft_canvasapplanguage_SyncErrors": "Sync Errors",
+      "msft_canvasapplanguageid": "Canvas App Language",
+      "msft_canvasappstringvalue_languagetag_msf": "Canvas App String Values",
+      "msft_displayname": "Display Name",
+      "msft_languagetag": "Language Tag",
+      "msft_name": "Name",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Canvas App Languages",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Canvas App Languages (Views)",
+    "Name": "_msft_canvasapplanguage_views",
+    "RelatedEntityName": "Canvas App Languages",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "07f88e4c-b1e6-41cd-8de0-a4481fbd53e3": "Canvas App Language Associated View",
+      "74887383-79ea-4384-9e67-b19ba92441cd": "Canvas App Language Lookup View",
+      "8325cb5e-d8fc-42f2-8ee7-872c517c17c6": "Canvas App Language Advanced Find View",
+      "c837ccfc-48ab-4aba-b2fe-56289e986bdb": "Active Canvas App Languages",
+      "dc6736f8-67b3-475e-9ee7-864e93450548": "Inactive Canvas App Languages"
+    }
+  },
+  {
+    "DisplayName": "Status (Canvas App Languages)",
+    "Name": "msft_canvasapplanguage_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Canvas App Languages"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Canvas App Languages",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Canvas App Languages)",
+    "Name": "msft_canvasapplanguage_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Canvas App Languages"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Canvas App Languages",
+    "Type": "OptionSetInfo"
+  }
+]

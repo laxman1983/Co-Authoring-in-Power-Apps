@@ -1,0 +1,231 @@
+SplashScreen As screen:
+    Height: =Max(App.Height, App.DesignHeight)
+    OnHidden: |-
+        =//Check to see if this is a mobile device if so, then save data for all other apps
+        //Notify("Trying Save",NotificationType.Information);
+        If(
+            Value(AltCheck_Lbl_1.Text) > 0,
+            SaveData(
+                MySplashSelectionsCollection,
+                "MySplashSelections"
+            );
+         //Notify("Did Save",NotificationType.Information);   
+        );
+    OnVisible: =Refresh(Systems);Refresh(Regions);
+    Orientation: =If(SplashScreen.Width < SplashScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= SplashScreen.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    Splash_Next_Button As button:
+        BorderColor: =ColorFade(Splash_Next_Button.Fill, -15%)
+        Fill: =varColorPrimary
+        FocusedBorderColor: =Splash_Next_Button.BorderColor
+        FontWeight: =FontWeight.Bold
+        Height: =80
+        HoverBorderColor: =ColorFade(Splash_Next_Button.BorderColor, 20%)
+        HoverFill: =ColorFade(Splash_Next_Button.Fill, -20%)
+        OnSelect: |+
+            =Trace("Splash Set Button",TraceSeverity.Information);
+            
+            //Always reset
+            ClearCollect(
+                MySplashSelectionsCollection,
+                {
+                    MySystemCol: SystemSelect_System_DD.Selected.'System Name',
+                    MyRegionCol:  SystemSelect_Region_DD.Selected.'Region Name',
+                    MyFacilityCol: SystemSelect_Facility_DD.Selected.'Facility Name',
+                    MyFacilityColID: SystemSelect_Facility_DD.Selected.Facility
+            
+                }
+            );
+            Set(GotoSplash,false);
+            Set(Override_Facility_Param,true);
+            Navigate(HomeScreen,Fade);
+            
+            
+        PressedBorderColor: =Splash_Next_Button.Fill
+        PressedColor: =Splash_Next_Button.Fill
+        PressedFill: =Splash_Next_Button.Color
+        Size: =18
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenNextButtonText").TextValue
+        Width: =570
+        X: =(Parent.Width-Splash_Next_Button.Width)/2
+        Y: =1015
+        ZIndex: =4
+
+    Splash_SelectHospitalHeader_Lbl As label:
+        FocusedBorderColor: =Splash_SelectHospitalHeader_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =49
+        HoverBorderColor: =Splash_SelectHospitalHeader_Lbl.BorderColor
+        HoverColor: =Splash_SelectHospitalHeader_Lbl.Color
+        HoverFill: =Splash_SelectHospitalHeader_Lbl.Fill
+        PressedBorderColor: =Splash_SelectHospitalHeader_Lbl.BorderColor
+        PressedColor: =Splash_SelectHospitalHeader_Lbl.Color
+        PressedFill: =Splash_SelectHospitalHeader_Lbl.Fill
+        Size: =18
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenHospitalDropdownLabel").TextValue
+        Width: =565
+        X: =35
+        Y: =510
+        ZIndex: =5
+
+    SystemSelect_System_DD As dropdown:
+        BorderColor: =RGBA(102, 102, 102, 1)
+        ChevronBackground: =RGBA(250, 249, 248, 1)
+        ChevronFill: =Black
+        ChevronHoverBackground: =White
+        Default: =First(MySplashSelectionsCollection).MySystemCol
+        Fill: =RGBA(250, 249, 248, 1)
+        FocusedBorderColor: =SystemSelect_System_DD.BorderColor
+        Height: =80
+        HoverBorderColor: =ColorFade(SystemSelect_System_DD.BorderColor, 15%)
+        Items: =Sort(Systems,'System Name',Ascending)
+        PressedBorderColor: =SystemSelect_System_DD.HoverBorderColor
+        Size: =21
+        Width: =570
+        X: =35
+        Y: =559
+        ZIndex: =6
+
+    Splash_SelectregionHeader_Lbl As label:
+        FocusedBorderColor: =Splash_SelectregionHeader_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =51
+        HoverBorderColor: =Splash_SelectregionHeader_Lbl.BorderColor
+        HoverColor: =Splash_SelectregionHeader_Lbl.Color
+        HoverFill: =Splash_SelectregionHeader_Lbl.Fill
+        PressedBorderColor: =Splash_SelectregionHeader_Lbl.BorderColor
+        PressedColor: =Splash_SelectregionHeader_Lbl.Color
+        PressedFill: =Splash_SelectregionHeader_Lbl.Fill
+        Size: =18
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenRegionDropdownLabel").TextValue
+        Width: =570
+        X: =35
+        Y: =660
+        ZIndex: =7
+
+    SystemSelect_Region_DD As dropdown:
+        BorderColor: =RGBA(102, 102, 102, 1)
+        ChevronBackground: =RGBA(250, 249, 248, 1)
+        ChevronFill: =Black
+        ChevronHoverBackground: =White
+        Default: =First(MySplashSelectionsCollection).MyRegionCol
+        Fill: =RGBA(250, 249, 248, 1)
+        FocusedBorderColor: =SystemSelect_Region_DD.BorderColor
+        Height: =80
+        HoverBorderColor: =ColorFade(SystemSelect_Region_DD.BorderColor, 15%)
+        Items: =Sort(Filter(Regions,SystemSelect_System_DD.Selected.System in System.System),'Region Name',Ascending)
+        PressedBorderColor: =SystemSelect_Region_DD.HoverBorderColor
+        Size: =21
+        Width: =570
+        X: =35
+        Y: =711
+        ZIndex: =8
+
+    Splash_SelectFacilityHeader_Lbl As label:
+        FocusedBorderColor: =Splash_SelectFacilityHeader_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =51
+        HoverBorderColor: =Splash_SelectFacilityHeader_Lbl.BorderColor
+        HoverColor: =Splash_SelectFacilityHeader_Lbl.Color
+        HoverFill: =Splash_SelectFacilityHeader_Lbl.Fill
+        PressedBorderColor: =Splash_SelectFacilityHeader_Lbl.BorderColor
+        PressedColor: =Splash_SelectFacilityHeader_Lbl.Color
+        PressedFill: =Splash_SelectFacilityHeader_Lbl.Fill
+        Size: =18
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenFacilityDropdownLabel").TextValue
+        Width: =570
+        X: =35
+        Y: =819
+        ZIndex: =9
+
+    SystemSelect_Facility_DD As dropdown:
+        BorderColor: =RGBA(102, 102, 102, 1)
+        ChevronBackground: =RGBA(250, 249, 248, 1)
+        ChevronFill: =Black
+        ChevronHoverBackground: =White
+        Default: =First(MySplashSelectionsCollection).MyFacilityCol
+        Fill: =RGBA(250, 249, 248, 1)
+        FocusedBorderColor: =SystemSelect_Facility_DD.BorderColor
+        Height: =80
+        HoverBorderColor: =ColorFade(SystemSelect_Facility_DD.BorderColor, 15%)
+        Items: =Sort(Filter(Facilities,SystemSelect_Region_DD.Selected.Region in Region.Region),'Facility Name',Ascending)
+        PressedBorderColor: =SystemSelect_Facility_DD.HoverBorderColor
+        Size: =21
+        Width: =570
+        X: =35
+        Y: =870
+        ZIndex: =10
+
+    AltCheck_Lbl_1 As label:
+        BorderThickness: =1
+        FocusedBorderColor: =AltCheck_Lbl_1.BorderColor
+        Height: =68
+        HoverBorderColor: =AltCheck_Lbl_1.BorderColor
+        HoverColor: =AltCheck_Lbl_1.Color
+        HoverFill: =AltCheck_Lbl_1.Fill
+        PressedBorderColor: =AltCheck_Lbl_1.BorderColor
+        PressedColor: =AltCheck_Lbl_1.Color
+        PressedFill: =AltCheck_Lbl_1.Fill
+        Size: =14
+        Text: =Location.Altitude
+        Visible: =false
+        Width: =233
+        X: =116
+        Y: =40
+        ZIndex: =11
+
+    Splash_Main_Icon As image:
+        Fill: =RGBA(250, 249, 248, 1)
+        FocusedBorderColor: =Splash_Main_Icon.BorderColor
+        Height: =365
+        HoverBorderColor: =ColorFade(Splash_Main_Icon.BorderColor, 20%)
+        HoverFill: =ColorFade(Splash_Main_Icon.Fill, 20%)
+        Image: =SplashIcon
+        PressedBorderColor: =ColorFade(Splash_Main_Icon.BorderColor, -20%)
+        PressedFill: =ColorFade(Splash_Main_Icon.Fill, -20%)
+        Width: =638
+        ZIndex: =12
+
+    Splash_WelcomeHeader_Lbl As label:
+        Color: =varColorPrimary
+        FocusedBorderColor: =Splash_WelcomeHeader_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        Height: =49
+        HoverBorderColor: =Splash_WelcomeHeader_Lbl.BorderColor
+        HoverColor: =Splash_WelcomeHeader_Lbl.Color
+        HoverFill: =Splash_WelcomeHeader_Lbl.Fill
+        PressedBorderColor: =Splash_WelcomeHeader_Lbl.BorderColor
+        PressedColor: =Splash_WelcomeHeader_Lbl.Color
+        PressedFill: =Splash_WelcomeHeader_Lbl.Fill
+        Size: =18
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenSubtitle").TextValue
+        Width: =560
+        X: =Splash_AppNameHeader_Lbl.X + 5
+        Y: =Splash_AppNameHeader_Lbl.Y + Splash_AppNameHeader_Lbl.Height
+        ZIndex: =13
+
+    Splash_AppNameHeader_Lbl As label:
+        AutoHeight: =true
+        Color: =varColorPrimary
+        FocusedBorderColor: =Splash_AppNameHeader_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =Bold
+        Height: =96
+        HoverBorderColor: =Splash_AppNameHeader_Lbl.BorderColor
+        HoverColor: =Splash_AppNameHeader_Lbl.Color
+        HoverFill: =Splash_AppNameHeader_Lbl.Fill
+        PressedBorderColor: =Splash_AppNameHeader_Lbl.BorderColor
+        PressedColor: =Splash_AppNameHeader_Lbl.Color
+        PressedFill: =Splash_AppNameHeader_Lbl.Fill
+        Size: =28
+        Text: =LookUp(resourceStrings, TextID = "SplashScreenTitle").TextValue
+        Width: =560
+        X: =35
+        Y: =Splash_Main_Icon.Y + Splash_Main_Icon.Height + 5
+        ZIndex: =14
+

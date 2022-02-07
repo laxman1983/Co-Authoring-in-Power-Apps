@@ -1,0 +1,217 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_laborpoolrequests",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_laborpoolrequest",
+    "MaxGetRowsCount": 500,
+    "Name": "Labor Pool Requests",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_completed": "Completed",
+      "msft_datavalidation": "Data Validation",
+      "msft_departmentlocation": "Department Location",
+      "msft_DepartmentName2": "Departments",
+      "msft_description": "Description",
+      "msft_dispatched": "Dispatched",
+      "msft_Facility": "Facility",
+      "msft_laborpoolrequest_AsyncOperations": "System Jobs",
+      "msft_laborpoolrequest_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_laborpoolrequest_DuplicateBaseRecord": "Duplicate Records (msft_laborpoolrequest_DuplicateBaseRecord)",
+      "msft_laborpoolrequest_DuplicateMatchingRecord": "Duplicate Records (msft_laborpoolrequest_DuplicateMatchingRecord)",
+      "msft_laborpoolrequest_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_laborpoolrequest_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_laborpoolrequest_ProcessSession": "Process Sessions",
+      "msft_laborpoolrequest_SyncErrors": "Sync Errors",
+      "msft_laborpoolrequestid": "Labor Pool Request (msft_laborpoolrequestid)",
+      "msft_location": "Location",
+      "msft_otherrequestrole": "Other Request Role",
+      "msft_quantity": "Quantity",
+      "msft_requestorname": "Labor Pool Request (msft_requestorname)",
+      "msft_requestorphone": "Requestor Phone",
+      "msft_RequestRole": "Request Role",
+      "msft_requesttype": "Request Type",
+      "msft_resourceneededfor": "Resource needed for",
+      "msft_summary": "Summary",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "processid": "Process Id",
+      "stageid": "(Deprecated) Stage Id",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "traversedpath": "(Deprecated) Traversed Path",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Labor Pool Requests",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Labor Pool Requests (Views)",
+    "Name": "_msft_laborpoolrequest_views",
+    "RelatedEntityName": "Labor Pool Requests",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "1c5c85c4-a63d-4830-a3f9-28aa7b1f6b5f": "Labor Pool Request Associated View",
+      "7cbe1370-baee-412d-8089-3872589e7012": "Active Labor Pool Requests",
+      "8b33811b-b69d-4d0f-803e-029d7f9352be": "Inactive Labor Pool Requests",
+      "b25145a4-9cab-4f85-86d1-7fca3a4de5d6": "Labor Pool Request Lookup View",
+      "caee5ddd-8be0-4e44-9155-ea120b49818e": "Labor Pool Request Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Completed (Labor Pool Requests)",
+    "Name": "msft_laborpoolrequest_msft_completed",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_completed",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_completed",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Data Validation (Labor Pool Requests)",
+    "Name": "msft_laborpoolrequest_msft_datavalidation",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_datavalidation",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_datavalidation",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Dispatched (Labor Pool Requests)",
+    "Name": "msft_laborpoolrequest_msft_dispatched",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_dispatched",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_dispatched",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Labor Pool Requests)",
+    "Name": "msft_laborpoolrequest_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Labor Pool Requests)",
+    "Name": "msft_laborpoolrequest_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive",
+      "499260001": "Completed"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Resource needed for (Labor Pool Requests)",
+    "Name": "msft_msft_laborpoolrequest_resourceneededfor",
+    "OptionSetInfoNameMapping": {
+      "299600000": "Current Shift",
+      "299600001": "Upcoming Shift"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_resourceneededfor",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "msft_resourceneededfor",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Request Type",
+    "Name": "msft_requesttype",
+    "OptionSetInfoNameMapping": {
+      "299600000": "Clinical",
+      "299600001": "Non-clinical",
+      "299600002": "Don't know"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": true,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_requesttype",
+        "OptionSetReferenceEntityName": "Labor Pool Requests"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "msft_requesttype",
+    "RelatedEntityName": "Labor Pool Requests",
+    "Type": "OptionSetInfo"
+  }
+]

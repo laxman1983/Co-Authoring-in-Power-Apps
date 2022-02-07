@@ -1,0 +1,198 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_facilities",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_facility",
+    "MaxGetRowsCount": 500,
+    "Name": "Facilities",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_acutecarenonaiircapacity": "Acute Care Beds (non-AIIR Room) Total Capacity",
+      "msft_addresscity": "Address: City",
+      "msft_addresslat": "Address: Lat",
+      "msft_addresslong": "Address: Long",
+      "msft_addressstate": "Address: State",
+      "msft_addressstreet": "Address: Street",
+      "msft_addresszip": "Address: Zip",
+      "msft_anticipateddischargesinnext24hours": "Anticipated Discharges in next 24 hours",
+      "msft_cdcfeed_staffing_Facility_msft_Facil": "Healthcare Worker Staffings",
+      "msft_Census_facility_msft_Facility": "Census",
+      "msft_Contact_Facility_msft_Facility": "Patients",
+      "msft_COVID_facility_msft_Facility": "COVID",
+      "msft_covidacutecarecapacity": "Acute Care Beds (AIIR Room) Total Capacity",
+      "msft_covidicucapacity": "ICU Beds (AIIR Room) Total Capacity",
+      "msft_datalastpublishedon": "Data Last Published On",
+      "msft_description": "Description",
+      "msft_doeshaveanemergency": "Does Have an Emergency",
+      "msft_dohnumber": "DOH Number",
+      "msft_effectiveenddate": "Effective End Date",
+      "msft_effectivestartdate": "Effective Start Date",
+      "msft_EquipmentNeeded_Facility_msft_Facili": "Equipment Needs",
+      "msft_excludedsupplies": "Excluded Supplies",
+      "msft_facility_AsyncOperations": "System Jobs",
+      "msft_facility_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_facility_DuplicateBaseRecord": "Duplicate Records (msft_facility_DuplicateBaseRecord)",
+      "msft_facility_DuplicateMatchingRecord": "Duplicate Records (msft_facility_DuplicateMatchingRecord)",
+      "msft_facility_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_facility_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_facility_ProcessSession": "Process Sessions",
+      "msft_facility_SyncErrors": "Sync Errors",
+      "msft_FacilityDischargeInformation_Facilit": "Facility Discharge Information",
+      "msft_facilityid": "Facility",
+      "msft_facilityname": "Facility Name",
+      "msft_followsdropletprotocol": "Follows Droplet Protocol ",
+      "msft_icunonaiircapacity": "ICU Beds (non-AIIR Room) Total Capacity",
+      "msft_LaborPoolRequest_Facility_msft_Facil": "Labor Pool Requests",
+      "msft_Location_Factility_msft_Facility": "Locations",
+      "msft_msft_facility_msft_cdcfeed_patientsandcapacity_facility": "Patient Impacts And Hospital Capacities",
+      "msft_msft_facility_msft_cdcfeed_supplies_facility": "Healthcare Supplies",
+      "msft_msft_facility_msft_staffingentry_facility": "Staffing Entries",
+      "msft_msft_facility_msft_staffingentryitem_Facility": "Staffing Entry Items",
+      "msft_neonatalbedcapacity": "Neonatal Bed Capacity",
+      "msft_numcompleteditems": "Number of Completed Items",
+      "msft_numreviewpending": "Number of Review Items Pending",
+      "msft_PatientCensus_Facility_msft_Facility": "Patient Census",
+      "msft_Region": "Region",
+      "msft_reviewprogress": "Review Progress %",
+      "msft_StaffingNeeded_facility_msft_Facilit": "Staffing Needs",
+      "msft_SuppliesEntry_Facility_msft_Facility": "Supplies Entries",
+      "msft_SuppliesEntryItem_Facility_msft_Faci": "Supplies Entry Items",
+      "msft_SupplyTracking_Facility_msft_Facilit": "Supply Trackings",
+      "msft_surgebedcapacity": "Total Overflow/Surge/Expansion Bed Capacity",
+      "msft_SyncCensus_Facility_msft_Facility": "Bed Census",
+      "msft_SyncCovid_Facility_msft_Facility": "Sync Covids",
+      "msft_SyncEquipmentNeeded_Facility_msft_Fa": "Equipments",
+      "msft_SyncStaffingNeeded_Facility_msft_Fac": "Sync Staffing Needs",
+      "msft_SyncSupplyTracking_Facility_msft_Fac": "Sync Supply Trackings",
+      "msft_totalbeds": "(Deprecated) Total Beds",
+      "msft_totalcovidbeds": "(Deprecated) Total COVID Beds",
+      "msft_totallicensedbedcapacity": "Total Inpatient Bed Capacity in other areas",
+      "msft_totalmortuarycapacity": "Total  Mortuary Capacity",
+      "msft_totaloutpatientbedcapacity": "Total Outpatient Bed Capacity",
+      "msft_totalpediatricacutecarebednonaiircapacity": "Total Pediatric Acute Care Beds (Non-AIIR)Capacity",
+      "msft_totalpediatricacutecarebedsaiircapacity": "Total Pediatric Acute Care Beds (AIIR) Capacity",
+      "msft_totalpediatricicubedsaiirroomcapacity": "Total Pediatric ICU Beds  (AIIR Room) Capacity",
+      "msft_totalpediatricicubedsnonaiirroomcapacity": "Total Pediatric ICU Beds  (Non-AIIR Room) Capacity",
+      "msft_totalvents": "Total Vents",
+      "msft_yesterdaysactualdischarge": "Yesterdays Actual Discharge",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Facilities",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Facilities (Views)",
+    "Name": "_msft_facility_views",
+    "RelatedEntityName": "Facilities",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2c975967-cc56-4194-9c29-4716918cac07": "Facility Advanced Find View",
+      "47349ee3-5995-ea11-a811-000d3a5acca2": "Facility Review Data View",
+      "73de49d0-6a69-ea11-a812-000d3a579cb1": "Portal Facility View",
+      "81e9b8f5-beb9-4902-9aa1-fa593dad157b": "Inactive Facilities",
+      "98935326-d905-46e5-a3f1-46bd182e4694": "Facility Associated View",
+      "9ad7d3e3-54a4-48ae-9d12-490684166c1f": "Facility Lookup View",
+      "a1a99b85-91a7-ea11-a812-000d3a990db5": "Active Facility CDC Reporting View",
+      "e93b96bd-30e9-46b4-927e-d345449fc94a": "Active Facilities"
+    }
+  },
+  {
+    "DisplayName": "Does Have an Emergency (Facilities)",
+    "Name": "msft_facility_msft_doeshaveanemergency",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_doeshaveanemergency",
+        "OptionSetReferenceEntityName": "Facilities"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_doeshaveanemergency",
+    "RelatedEntityName": "Facilities",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Facilities)",
+    "Name": "msft_facility_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Facilities"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Facilities",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Facilities)",
+    "Name": "msft_facility_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Facilities"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Facilities",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Follows Droplet Protocol  (Facilities)",
+    "Name": "msft_msft_facility_followsdropletprotocol",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_followsdropletprotocol",
+        "OptionSetReferenceEntityName": "Facilities"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_followsdropletprotocol",
+    "RelatedEntityName": "Facilities",
+    "Type": "OptionSetInfo"
+  }
+]

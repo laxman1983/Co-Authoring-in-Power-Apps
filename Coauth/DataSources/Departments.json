@@ -1,0 +1,102 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_departments",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_department",
+    "MaxGetRowsCount": 500,
+    "Name": "Departments",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_department_AsyncOperations": "System Jobs",
+      "msft_department_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_department_DuplicateBaseRecord": "Duplicate Records (msft_department_DuplicateBaseRecord)",
+      "msft_department_DuplicateMatchingRecord": "Duplicate Records (msft_department_DuplicateMatchingRecord)",
+      "msft_department_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_department_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_department_ProcessSession": "Process Sessions",
+      "msft_department_SyncErrors": "Sync Errors",
+      "msft_departmentid": "Department",
+      "msft_departmentname": "Department Name",
+      "msft_description": "Description",
+      "msft_effectiveenddate": "Effective End Date",
+      "msft_effectivestatedate": "Effective State Date",
+      "msft_LaborPoolRequest_msft_DepartmentName": "Labor Pool Requests",
+      "msft_StaffingType_Department_msft_Departm": "Staffing Types",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Departments",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Departments (Views)",
+    "Name": "_msft_department_views",
+    "RelatedEntityName": "Departments",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "291c2466-6b82-4594-870a-ed9fc8e79689": "Active Departments",
+      "3c5ae133-8d1b-4338-ae1f-a7881747188f": "Department Advanced Find View",
+      "5406bb29-bf16-4170-86f5-32f5e51e4e05": "Inactive Departments",
+      "7bdc66f5-6e1e-4465-b39b-823e77911759": "Department Associated View",
+      "bf54b6d1-11a8-4312-acfe-23c9b1292617": "Department Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Departments)",
+    "Name": "msft_department_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Departments"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Departments",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Departments)",
+    "Name": "msft_department_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Departments"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Departments",
+    "Type": "OptionSetInfo"
+  }
+]

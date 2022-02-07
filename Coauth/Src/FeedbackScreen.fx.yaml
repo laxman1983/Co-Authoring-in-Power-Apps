@@ -1,0 +1,322 @@
+FeedbackScreen As screen:
+    Fill: =varColorSecondary
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: =NewForm(FormFeedback);
+    Orientation: =If(FeedbackScreen.Width < FeedbackScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= FeedbackScreen.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    Rectangle2_1 As rectangle:
+        DisabledFill: =Rectangle2_1.Fill
+        Fill: =RGBA(237, 235, 233, 1)
+        FocusedBorderColor: =Rectangle2_1.BorderColor
+        Height: =148
+        HoverFill: =Rectangle2_1.Fill
+        PressedFill: =Rectangle2_1.Fill
+        Width: =640
+        Y: =988
+        ZIndex: =1
+
+    ScreenHeader_2 As ScreenHeader:
+        Fill: =varColorPrimary
+        Title: =LookUp(resourceStrings, TextID = "AppFeedbackScreenTitle").TextValue
+        X: =0
+        Y: =0
+        ZIndex: =2
+
+    FormFeedback As form:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        DataSource: ='App Feedbacks'
+        Fill: =varColorSecondary
+        Height: =Rectangle2_1.Y - (ScreenHeader_2.Y + ScreenHeader_2.Height)
+        OnSuccess: |-
+            =    Notify("Your feedback has been submitted successfully", NotificationType.Success, 2000);
+                ResetForm(FormFeedback);
+                Back();
+        Width: =640
+        Y: =ScreenHeader_2.Y + ScreenHeader_2.Height
+        ZIndex: =3
+
+        "'Feedback Type_DataCard1' As typedDataCard.comboBoxOptionSetSingleEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_feedbacktype"
+            Default: =ThisItem.'Feedback Type'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "FeedbackScreenTopicLabel").TextValue & " *"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =50
+            Required: =true
+            Update: =DataCardValue21.Selected.Value
+            Width: =640
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            DataCardKey22 As label:
+                AutoHeight: =true
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                FocusedBorderColor: =DataCardKey22.BorderColor
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey22.BorderColor
+                HoverColor: =DataCardKey22.Color
+                HoverFill: =DataCardKey22.Fill
+                PaddingLeft: =0
+                PressedBorderColor: =DataCardKey22.BorderColor
+                PressedColor: =DataCardKey22.Color
+                PressedFill: =DataCardKey22.Fill
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue21 As combobox:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                ChevronBackground: =RGBA(250, 249, 248, 1)
+                ChevronDisabledBackground: =RGBA(244, 244, 244, 1)
+                ChevronDisabledFill: =RGBA(166, 166, 166, 1)
+                ChevronFill: =RGBA(33, 33, 33, 1)
+                ChevronHoverBackground: =RGBA(212, 212, 212, 1)
+                ChevronHoverFill: =RGBA(33, 33, 33, 1)
+                Color: =RGBA(51, 51, 51, 1)
+                DefaultSelectedItems: =[Parent.Default]
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisplayFields: =["Value"]
+                DisplayMode: =Parent.DisplayMode
+                Fill: =RGBA(250, 249, 248, 1)
+                FocusedBorderColor: =DataCardValue21.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =80
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(212, 212, 212, 1)
+                IsSearchable: =false
+                Items: =Choices('Feedback Type (App Feedbacks)')
+                MoreItemsButtonColor: =DataCardValue21.ChevronBackground
+                PaddingLeft: =If(DataCardValue21.DisplayMode = DisplayMode.Edit, 5, 0)
+                PressedBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                PressedFill: =RGBA(0, 120, 212, 1)
+                SearchItems: =[]
+                SelectionFill: =RGBA(0, 120, 212, 1)
+                SelectionTagColor: =DataCardValue21.HoverColor
+                SelectionTagFill: =DataCardValue21.HoverFill
+                SelectMultiple: =false
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey22.Y + DataCardKey22.Height + 5
+                ZIndex: =2
+
+            ErrorMessage21 As label:
+                AutoHeight: =true
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(168, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage21.BorderColor
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =10
+                HoverBorderColor: =ErrorMessage21.BorderColor
+                HoverColor: =ErrorMessage21.Color
+                HoverFill: =ErrorMessage21.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage21.BorderColor
+                PressedColor: =ErrorMessage21.Color
+                PressedFill: =ErrorMessage21.Fill
+                Size: =21
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardValue21.Y + DataCardValue21.Height
+                ZIndex: =3
+
+        "'Feedback Comments_DataCard1' As typedDataCard.textualMultiLineEditCard":
+            BorderColor: =RGBA(166, 166, 166, 1)
+            BorderStyle: =BorderStyle.Solid
+            DataField: ="msft_feedbackcomments"
+            Default: =ThisItem.'Feedback Comments'
+            DisplayMode: =Parent.DisplayMode
+            DisplayName: =LookUp(resourceStrings, TextID = "FeedbackScreenCommentsLabel").TextValue & " *"
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =403
+            Required: =true
+            Update: =DataCardValue22.Text
+            Width: =640
+            X: =0
+            Y: =1
+            ZIndex: =1
+
+            DataCardKey23 As label:
+                AutoHeight: =true
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                Color: =RGBA(0, 0, 0, 1)
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                FocusedBorderColor: =DataCardKey23.BorderColor
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                HoverBorderColor: =DataCardKey23.BorderColor
+                HoverColor: =DataCardKey23.Color
+                HoverFill: =DataCardKey23.Fill
+                PaddingLeft: =0
+                PressedBorderColor: =DataCardKey23.BorderColor
+                PressedColor: =DataCardKey23.Color
+                PressedFill: =DataCardKey23.Fill
+                Size: =21
+                Text: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                Wrap: =false
+                X: =30
+                Y: =10
+                ZIndex: =1
+
+            DataCardValue22 As text:
+                BorderColor: =If(IsBlank(Parent.Error), Parent.BorderColor, Color.Red)
+                Color: =RGBA(51, 51, 51, 1)
+                Default: =Parent.Default
+                DelayOutput: =true
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisplayMode: =Parent.DisplayMode
+                Fill: =RGBA(250, 249, 248, 1)
+                FocusedBorderColor: =DataCardValue22.BorderColor
+                Font: =Font.'Segoe UI'
+                Height: =328
+                HintText: =LookUp(resourceStrings, TextID = "FeedbackScreenCommentsPlaceholder").TextValue
+                HoverBorderColor: =ColorFade(RGBA(0, 120, 212, 1), -30%)
+                HoverColor: =RGBA(51, 51, 51, 1)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                MaxLength: =8000
+                Mode: =TextMode.MultiLine
+                PaddingLeft: =10
+                PaddingTop: =10
+                PressedBorderColor: =RGBA(0, 120, 212, 1)
+                PressedColor: =RGBA(51, 51, 51, 1)
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =21
+                Tooltip: =Parent.DisplayName
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =DataCardKey23.Y + DataCardKey23.Height + 5
+                ZIndex: =2
+
+            ErrorMessage22 As label:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =2
+                DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                DisabledColor: =RGBA(168, 0, 0, 1)
+                FocusedBorderColor: =ErrorMessage22.BorderColor
+                FocusedBorderThickness: =4
+                Font: =Font.'Segoe UI'
+                Height: =10
+                HoverBorderColor: =ErrorMessage22.BorderColor
+                HoverColor: =ErrorMessage22.Color
+                HoverFill: =ErrorMessage22.Fill
+                Live: =Live.Assertive
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ErrorMessage22.BorderColor
+                PressedColor: =ErrorMessage22.Color
+                PressedFill: =ErrorMessage22.Fill
+                Size: =21
+                Text: =Parent.Error
+                Visible: =Parent.DisplayMode=DisplayMode.Edit
+                Width: =Parent.Width - 60
+                X: =30
+                Y: =367
+                ZIndex: =3
+
+    Icon1_1 As icon.ArrowLeft:
+        BorderColor: =RGBA(0, 0, 0, 1)
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledFill: =Icon1_1.Fill
+        FocusedBorderColor: =Icon1_1.BorderColor
+        Height: =40
+        HoverBorderColor: =ColorFade(Icon1_1.BorderColor, 20%)
+        HoverColor: =ColorFade(Icon1_1.Color, 20%)
+        HoverFill: =Icon1_1.Fill
+        Icon: =Icon.ArrowLeft
+        OnSelect: =Navigate(HomeScreen, LookUp(colStyles,Key="navigation_transition").Value)
+        PressedBorderColor: =ColorFade(Icon1_1.BorderColor, -20%)
+        PressedColor: =ColorFade(Icon1_1.Color, -20%)
+        PressedFill: =Icon1_1.Fill
+        Width: =40
+        X: =47
+        Y: =41
+        ZIndex: =5
+
+    btnAction_17 As button:
+        BorderColor: =RGBA(166, 166, 166, 1)
+        BorderStyle: =Solid
+        BorderThickness: =0
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        Fill: =varColorPrimary
+        FocusedBorderColor: =btnAction_17.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Normal
+        Height: =80
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverColor: =btnAction_17.Color
+        HoverFill: =ColorFade(btnAction_17.Fill, -10%)
+        OnSelect: |-
+            =Trace("Feedback Screen: Submit Button",TraceSeverity.Information);
+            
+            //////////////////
+            /* SAVE RECORDS */
+            //////////////////
+            
+            If(
+                // Proceed if all forms are validated.
+                And(
+                    FormFeedback.Valid
+                ),
+            
+                // Set the updates to static variables.
+                Set(updatesFeedback,Patch(Defaults('App Feedbacks'), FormFeedback.Updates));
+                // Submit the first form. Subsequent actions can be found in the OnSuccess properties of each form.
+                SubmitForm(FormFeedback);
+                ,
+            
+                Notify("Please complete all fields before proceeding",NotificationType.Warning,2000)
+            )
+        PressedBorderColor: =ColorFade(btnAction_17.BorderColor, -50%)
+        PressedColor: =btnAction_17.Color
+        PressedFill: =ColorFade(btnAction_17.Fill, -30%)
+        RadiusBottomLeft: =btnAction_17.RadiusTopLeft
+        RadiusBottomRight: =btnAction_17.RadiusTopLeft
+        RadiusTopLeft: =5
+        RadiusTopRight: =btnAction_17.RadiusTopLeft
+        Size: =22
+        Text: =LookUp(resourceStrings, TextID = "SubmitButtonText").TextValue
+        Width: =Parent.Width - 80
+        X: =(Parent.Width-btnAction_17.Width)/2
+        Y: =1015
+        ZIndex: =6
+

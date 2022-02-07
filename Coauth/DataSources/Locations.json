@@ -1,0 +1,179 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_locations",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_location",
+    "MaxGetRowsCount": 500,
+    "Name": "Locations",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_Acuity": "Acuity",
+      "msft_acutecareaiirinuse": "Acute Care AIIR in Use",
+      "msft_acutecarenonaiirinuse": "Acute Care Non-AIIR in Use",
+      "msft_acutecareoccupancypercentage": "Acute Care Occupancy Percentage",
+      "msft_alternatesiteflag": "Alternate Site Flag",
+      "msft_anticipateddischargesinnext24hoursloc": "Anticipated Discharges in next 24 hours",
+      "msft_availableacuitybeds": "Available Acuity Beds",
+      "msft_availablebed": "Available Beds",
+      "msft_blockedbeds": "Blocked Beds",
+      "msft_Census_Location_msft_Location": "Census",
+      "msft_Contact_Location_msft_Location": "Patients",
+      "msft_COVID_Location_msft_Location": "COVID",
+      "msft_covidacutecarecensusincds": "COVID Acute Care Census in CDS",
+      "msft_covidlocation": "COVID Location",
+      "msft_effectiveenddate": "Effective End Date",
+      "msft_effectivestatedate": "Effective Start Date",
+      "msft_EquipmentNeeded_Location_msft_Locati": "Equipment Needs",
+      "msft_FacilityDischargeInformation_locatio": "Facility Discharge Information",
+      "msft_Factility": "Facility",
+      "msft_floor": "Floor",
+      "msft_icuaiirbedsinuse": "ICU AIIR Beds in Use",
+      "msft_icunonaiirinuse": "ICU Non-AIIR Beds in Use",
+      "msft_LaborPoolRequest_location_msft_Locat": "Labor Pool Requests",
+      "msft_lastcensus": "Last Census",
+      "msft_licensedbedscurrentlyinuse": "Licensed Beds Currently In Use",
+      "msft_location_AsyncOperations": "System Jobs",
+      "msft_location_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_location_DuplicateBaseRecord": "Duplicate Records (msft_location_DuplicateBaseRecord)",
+      "msft_location_DuplicateMatchingRecord": "Duplicate Records (msft_location_DuplicateMatchingRecord)",
+      "msft_location_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_location_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_location_ProcessSession": "Process Sessions",
+      "msft_location_SyncErrors": "Sync Errors",
+      "msft_locationacuity": "Location Acuity",
+      "msft_locationid": "Location",
+      "msft_locationname": "Location Name",
+      "msft_locationorder": "Location Order",
+      "msft_occupancypercentage": "Occupancy Percentage ",
+      "msft_StaffingNeeded_Location_msft_Locatio": "Staffing Needs",
+      "msft_SupplyTracking_location_msft_Locatio": "Supply Trackings",
+      "msft_surgebeds": "Surge Beds",
+      "msft_surgebedscurrentlyinuse": "Surge Beds Currently In Use",
+      "msft_SyncCensus_Location_msft_Location": "Bed Census",
+      "msft_SyncCovid_Location_msft_Location": "Sync Covids",
+      "msft_SyncEquipmentNeeded_Location_msft_Lo": "Equipments",
+      "msft_SyncStaffingNeeded_Location_msft_Loc": "Sync Staffing Needs",
+      "msft_totalbeds": "Total Beds",
+      "msft_totalcovidbeds": "Total COVID Beds",
+      "msft_unit": "Unit",
+      "msft_yesterdaysactualdischargeloc": "Yesterdays Actual Discharge",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Locations",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Locations (Views)",
+    "Name": "_msft_location_views",
+    "RelatedEntityName": "Locations",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "16e5cde0-915a-44a3-a366-c3bf4a68fca2": "Location Advanced Find View",
+      "430a4409-f9d1-420e-ad01-c2760031e48a": "Inactive Locations",
+      "4840b935-ad6b-ea11-a811-000d3a363dd3": "Bed Management",
+      "79601835-f875-ea11-a811-000d3a579c84": "Acuity Available Beds",
+      "8f9b7153-01b3-47ad-9616-e33a8c59b3c4": "Location Associated View",
+      "c9a87e49-16b5-4846-847b-58c66fc3dee7": "Active Locations",
+      "d745b645-2626-48c4-bee2-b09c3cac974b": "Location Lookup View"
+    }
+  },
+  {
+    "DisplayName": "COVID Location (Locations)",
+    "Name": "msft_location_msft_covidlocation",
+    "OptionSetInfoNameMapping": {
+      "299600000": "Yes",
+      "299600001": "No"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_covidlocation",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "msft_covidlocation",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status (Locations)",
+    "Name": "msft_location_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Locations)",
+    "Name": "msft_location_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Alternate Site Flag (Locations)",
+    "Name": "msft_msft_location_alternatesiteflag",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_alternatesiteflag",
+        "OptionSetReferenceEntityName": "Locations"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_alternatesiteflag",
+    "RelatedEntityName": "Locations",
+    "Type": "OptionSetInfo"
+  }
+]

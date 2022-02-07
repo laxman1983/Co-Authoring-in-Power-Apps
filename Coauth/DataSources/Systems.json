@@ -1,0 +1,101 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_systems",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_system",
+    "MaxGetRowsCount": 500,
+    "Name": "Systems",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_description": "Description",
+      "msft_effectiveenddate": "Effective End Date",
+      "msft_effectivestartdate": "Effective Start Date",
+      "msft_Region_System_msft_System": "Regions",
+      "msft_system_AsyncOperations": "System Jobs",
+      "msft_system_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_system_DuplicateBaseRecord": "Duplicate Records (msft_system_DuplicateBaseRecord)",
+      "msft_system_DuplicateMatchingRecord": "Duplicate Records (msft_system_DuplicateMatchingRecord)",
+      "msft_system_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_system_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_system_ProcessSession": "Process Sessions",
+      "msft_system_SyncErrors": "Sync Errors",
+      "msft_systemid": "System",
+      "msft_systemname": "System Name",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Systems",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Systems (Views)",
+    "Name": "_msft_system_views",
+    "RelatedEntityName": "Systems",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "18461f05-4cb5-4ec7-b979-bc392ac0db79": "Active Systems",
+      "452b2010-7c42-4e75-bca9-fc6adfd8c989": "System Associated View",
+      "887e363b-7606-4bb0-a390-26f8bd5ef1d8": "System Lookup View",
+      "8a8d0c93-a3eb-431f-8d1b-1975cabba33f": "Inactive Systems",
+      "d9cb1ca2-12bf-4bb7-b4b2-5c4b68e0104d": "System Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (Systems)",
+    "Name": "msft_system_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Systems"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Systems",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Systems)",
+    "Name": "msft_system_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Systems"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Systems",
+    "Type": "OptionSetInfo"
+  }
+]

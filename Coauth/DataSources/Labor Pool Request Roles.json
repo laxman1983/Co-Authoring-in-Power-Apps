@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_laborpoolrequestroles",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_laborpoolrequestrole",
+    "MaxGetRowsCount": 500,
+    "Name": "Labor Pool Request Roles",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_description": "Description",
+      "msft_LaborPoolRequest_RequestRole_msft_La": "Labor Pool Requests",
+      "msft_laborpoolrequestrole_AsyncOperations": "System Jobs",
+      "msft_laborpoolrequestrole_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_laborpoolrequestrole_DuplicateBaseRecord": "Duplicate Records (msft_laborpoolrequestrole_DuplicateBaseRecord)",
+      "msft_laborpoolrequestrole_DuplicateMatchingRecord": "Duplicate Records (msft_laborpoolrequestrole_DuplicateMatchingRecord)",
+      "msft_laborpoolrequestrole_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_laborpoolrequestrole_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_laborpoolrequestrole_ProcessSession": "Process Sessions",
+      "msft_laborpoolrequestrole_SyncErrors": "Sync Errors",
+      "msft_laborpoolrequestroleid": "Labor Pool Request Role",
+      "msft_name": "Name",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Labor Pool Request Roles",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Labor Pool Request Roles (Views)",
+    "Name": "_msft_laborpoolrequestrole_views",
+    "RelatedEntityName": "Labor Pool Request Roles",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "508a6cb6-2119-4400-9977-571c873b911f": "Labor Pool Request Role Associated View",
+      "8c2c0857-cb9d-41b7-8eaf-2ef08a2d8308": "Labor Pool Request Role Lookup View",
+      "a0936d78-4c5e-4220-9d75-0ea703d90bd8": "Labor Pool Request Role Advanced Find View",
+      "a90b21f0-9e44-4a64-a853-3b8d4a9b7f61": "Active Labor Pool Request Roles",
+      "f1c72669-2e2c-47c1-82cc-09de585c6014": "Inactive Labor Pool Request Roles"
+    }
+  },
+  {
+    "DisplayName": "Status (Labor Pool Request Roles)",
+    "Name": "msft_laborpoolrequestrole_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Labor Pool Request Roles"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Labor Pool Request Roles",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Labor Pool Request Roles)",
+    "Name": "msft_laborpoolrequestrole_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Labor Pool Request Roles"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Labor Pool Request Roles",
+    "Type": "OptionSetInfo"
+  }
+]

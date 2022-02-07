@@ -1,0 +1,117 @@
+{
+  "QualifiedValues": [
+    {
+      "Kind": "default.cds_msft_appfeedback_forms",
+      "Namespace": "App Feedbacks (Forms)",
+      "Values": {
+        "Information": "d998cde3-f889-4f45-96ce-e1e1966c6944"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_app_forms",
+      "Namespace": "Apps (Forms)",
+      "Values": {
+        "Information": "d8e2aa23-ba5c-4422-b7cb-9ca8e9fb9386"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_facility_forms",
+      "Namespace": "Facilities (Forms)",
+      "Values": {
+        "Download Data For CDC": "dc6c09a5-0a5e-4462-99d9-164590a7adcb",
+        "Information": "f9b640cb-d2bc-4aec-9b36-ccd52a853132",
+        "Main Form": "83498be0-0896-4c9b-a57c-0716a751d431",
+        "Portal Facility Update Form": "426807ad-6769-ea11-a812-000d3a579cb1",
+        "Review and Publish": "9faefb97-df5a-4888-ab5d-f6aa245c69e4"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_appconfig_forms",
+      "Namespace": "App Configs (Forms)",
+      "Values": {
+        "Information": "489ef8ff-6fa0-4dec-8e37-72687aaff67d"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_region_forms",
+      "Namespace": "Regions (Forms)",
+      "Values": {
+        "Information": "d5554d08-5f87-4d6b-bdd7-f204c0ec6337"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_system_forms",
+      "Namespace": "Systems (Forms)",
+      "Values": {
+        "Information": "1fba626a-c376-4572-81e7-c879942cea54"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_laborpoolrequestrole_forms",
+      "Namespace": "Labor Pool Request Roles (Forms)",
+      "Values": {
+        "Information": "fbac1cd4-ff63-4c4a-91b7-c7d8a22c6fa3"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_laborpoolrequest_forms",
+      "Namespace": "Labor Pool Requests (Forms)",
+      "Values": {
+        "Information": "8fa2b40d-0265-46f6-acf6-cc09f31a9da5"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_department_forms",
+      "Namespace": "Departments (Forms)",
+      "Values": {
+        "Information": "af302bbf-4de6-4268-8181-fb03b0eafa82"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_location_forms",
+      "Namespace": "Locations (Forms)",
+      "Values": {
+        "Information": "6d2d6edf-cf29-45b2-8ff6-ab94bdbf10d1"
+      }
+    },
+    {
+      "Kind": "default.cds_systemuser_forms",
+      "Namespace": "Users (Forms)",
+      "Values": {
+        "Application User": "d26924ef-4d80-46f7-ab1d-e6ae80a54ce8",
+        "Information": "094fb08a-77bb-49e0-b7ea-8dbddfd01294",
+        "User": "c2cd9e55-d4b4-4b55-9951-16ead79643e5",
+        "User form – Business": "c2413504-7eb2-4c59-a087-95d819866114",
+        "User Hierarchy Tile Form": "c68d6c09-d7a7-4959-8d0f-44b8cff9b452"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_canvasapplanguage_forms",
+      "Namespace": "Canvas App Languages (Forms)",
+      "Values": {
+        "Information": "e001c204-0277-43d6-b837-a03694d95f35"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_canvasappstringvalue_forms",
+      "Namespace": "Canvas App String Values (Forms)",
+      "Values": {
+        "Information": "eeb11bfc-7add-4d59-b62d-d20a6f126f81"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_canvasappstring_forms",
+      "Namespace": "Canvas App Strings (Forms)",
+      "Values": {
+        "Information": "3ce544e5-a53f-4870-a548-eef5a064580f"
+      }
+    },
+    {
+      "Kind": "default.cds_msft_appcategory_forms",
+      "Namespace": "App Categories (Forms)",
+      "Values": {
+        "Information": "b12d9e31-7057-4ed5-b8de-bda22ae803ce"
+      }
+    }
+  ]
+}

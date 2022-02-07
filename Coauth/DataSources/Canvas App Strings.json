@@ -1,0 +1,99 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_canvasappstrings",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_canvasappstring",
+    "MaxGetRowsCount": 500,
+    "Name": "Canvas App Strings",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_canvasappstring_AsyncOperations": "System Jobs",
+      "msft_canvasappstring_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_canvasappstring_DuplicateBaseRecord": "Duplicate Records (msft_canvasappstring_DuplicateBaseRecord)",
+      "msft_canvasappstring_DuplicateMatchingRecord": "Duplicate Records (msft_canvasappstring_DuplicateMatchingRecord)",
+      "msft_canvasappstring_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_canvasappstring_msft_canvasappstring": "Canvas App String Values",
+      "msft_canvasappstring_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_canvasappstring_ProcessSession": "Process Sessions",
+      "msft_canvasappstring_SyncErrors": "Sync Errors",
+      "msft_canvasappstringid": "Canvas App String",
+      "msft_description": "Description",
+      "msft_textid": "TextID",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Canvas App Strings",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Canvas App Strings (Views)",
+    "Name": "_msft_canvasappstring_views",
+    "RelatedEntityName": "Canvas App Strings",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2ebde7da-8551-4e18-9c38-a66de4e4cc59": "Canvas App String Advanced Find View",
+      "81782e4f-841a-437a-90d5-6960d4f1ec90": "Canvas App String Associated View",
+      "84b36f3f-1a62-4082-abde-fcee163959af": "Active Canvas App Strings",
+      "99023ab6-741e-45b8-bac9-8970c0d248f6": "Inactive Canvas App Strings",
+      "d6983c77-8102-462b-9cea-9b91f2998d9d": "Canvas App String Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Canvas App Strings)",
+    "Name": "msft_canvasappstring_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Canvas App Strings"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Canvas App Strings",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Canvas App Strings)",
+    "Name": "msft_canvasappstring_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Canvas App Strings"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Canvas App Strings",
+    "Type": "OptionSetInfo"
+  }
+]

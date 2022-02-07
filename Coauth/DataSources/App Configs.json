@@ -1,0 +1,122 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_appconfigs",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_appconfig",
+    "MaxGetRowsCount": 500,
+    "Name": "App Configs",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_appconfig_AsyncOperations": "System Jobs",
+      "msft_appconfig_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_appconfig_DuplicateBaseRecord": "Duplicate Records (msft_appconfig_DuplicateBaseRecord)",
+      "msft_appconfig_DuplicateMatchingRecord": "Duplicate Records (msft_appconfig_DuplicateMatchingRecord)",
+      "msft_appconfig_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_appconfig_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_appconfig_ProcessSession": "Process Sessions",
+      "msft_appconfig_SyncErrors": "Sync Errors",
+      "msft_appconfigid": "App Config",
+      "msft_appname": "App Name",
+      "msft_devicesharingenabled": "Device Sharing Enabled",
+      "msft_logoicon": "Logo Icon",
+      "msft_logoiconid": "msft_LogoIconId",
+      "msft_primarycolor": "Primary Color",
+      "msft_secondarycolor": "Secondary Color",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "App Configs",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "App Configs (Views)",
+    "Name": "_msft_appconfig_views",
+    "RelatedEntityName": "App Configs",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "3695a97c-b8f3-4dae-97da-61ece2d339dd": "App Config Associated View",
+      "7c8d6371-84f4-4e96-8694-f42e256883d1": "App Config Advanced Find View",
+      "b9680718-4b9b-40d5-a694-886f0fc0bc3c": "App Config Lookup View",
+      "df83ed65-d6c1-4212-ab11-19f0c08c6134": "Inactive App Configs",
+      "ff17552a-a56e-4a04-8981-6e9960fb8ae1": "Active App Configs"
+    }
+  },
+  {
+    "DisplayName": "Status (App Configs)",
+    "Name": "msft_appconfig_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "App Configs"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "App Configs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (App Configs)",
+    "Name": "msft_appconfig_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "App Configs"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "App Configs",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Device Sharing Enabled (App Configs)",
+    "Name": "msft_msft_appconfig_devicesharing",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_devicesharingenabled",
+        "OptionSetReferenceEntityName": "App Configs"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_devicesharingenabled",
+    "RelatedEntityName": "App Configs",
+    "Type": "OptionSetInfo"
+  }
+]

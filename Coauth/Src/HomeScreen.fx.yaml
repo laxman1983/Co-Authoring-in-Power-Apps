@@ -1,0 +1,211 @@
+HomeScreen As screen:
+    Height: =Max(App.Height, App.DesignHeight)
+    OnVisible: |-
+        =////////////////////////////
+        //For SplashScreenCheck
+        ////////////////////////////
+        Set(
+            GotoSplash,
+            false
+        );
+        //Check for Param and if web
+        If(
+            Len(Param("FacilityID")) > 0 && IsBlank(AltCheck_Lbl.Text) = true,
+          //Found FacilityID in the URL and it is web
+            Set(
+                GotoSplash,
+                false
+            );
+          //Lookup Facility based on ID
+        Set(
+                MyParamRegion,
+                First(
+                    Filter(
+                        Facilities,
+                        msft_facilityid = GUID(Param("FacilityID"))
+                    )
+                ).Region.msft_regionid
+            );
+         If(Override_Facility_Param = false,   
+          //Set Collect
+        ClearCollect(
+                MySplashSelectionsCollection,
+                {
+                    MySystemCol: First(
+                        Filter(
+                            Regions,
+                            Region = MyParamRegion
+                        )
+                    ).System.'System Name',
+                    MyRegionCol: First(
+                        Filter(
+                            Regions,
+                            Region = MyParamRegion
+                        )
+                    ).'Region Name',
+                    MyFacilityCol: ParamFacility,
+                     MyFacilityColID:  LookUp(
+                    FacilitiesList,
+                    Id = GUID(Param("FacilityID"))
+                ).Id
+                }
+            );
+            
+        );
+          );
+        //Check for No Param but web and no Collection
+        If(
+            Len(Param("FacilityID")) = 0 && IsBlank(AltCheck_Lbl.Text) = true && CountRows(MySplashSelectionsCollection) = 0,
+            Set(
+                GotoSplash,
+                true
+            );
+            
+        );
+        
+        //Check for Param and mobile and no collection
+        If(
+            Len(Param("FacilityID")) > 0 && Value(AltCheck_Lbl.Text) > 0 && CountRows(MySplashSelectionsCollection) = 0,
+               //Is Mobile, save the data
+                Set(
+                MyParamRegion,
+                First(
+                    Filter(
+                        Facilities,
+                        msft_facilityid = GUID(Param("FacilityID"))
+                    )
+                ).Region.msft_regionid
+                );
+                Set(
+                MyParamSystem,
+                First(
+                    Filter(
+                        Regions,
+                        msft_regionid = GUID(MyParamRegion)
+                    )
+                ).System.msft_systemid
+                );
+             //Set Collect
+        ClearCollect(
+                MySplashSelectionsCollection,
+                {
+                     MySystemCol: First(
+                        Filter(
+                            Systems,
+                            msft_systemid = MyParamSystem)
+                        ).'System Name',
+                    MyRegionCol: First(
+                        Filter(
+                            Regions,
+                            Region = MyParamRegion
+                        )
+                    ).'Region Name',
+                    MyFacilityCol: ParamFacility,
+                     MyFacilityColID:  LookUp(
+                    FacilitiesList,
+                    Id = GUID(Param("FacilityID"))
+                ).Id
+                }
+            );
+            SaveData(
+                MySplashSelectionsCollection,
+                "MySplashSelections"
+            );
+           
+        );
+        //END MOBILE CHECK
+        
+        //No Param and mobile 
+        If(
+            Len(Param("FacilityID")) = 0 && Value(AltCheck_Lbl.Text) > 0,
+                //Check to see if I have stuff in the collection
+            If(
+                CountRows(MySplashSelectionsCollection) = 0,
+                   //Nothing Found, try to pull from the Offline collection
+                LoadData(
+                    MySplashSelectionsCollection,
+                    "MySplashSelections",
+                    true
+                );
+                      //Now check to see if there are records, if not I need to go to splash
+            If(
+                    CountRows(MySplashSelectionsCollection) = 0,
+                    Set(
+                        GotoSplash,
+                        true
+                    )
+                )
+            )
+        );
+        //END MOBILE CHECK
+        ////////////////////////////
+        //END For SplashScreenCheck
+        ////////////////////////////
+    Orientation: =If(HomeScreen.Width < HomeScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= HomeScreen.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    AppSwitcher_1 As AppSwitcher:
+        BackgroundColor: =RGBA(0, 0, 0, 0)
+        ChangeFacility: =SplashScreen
+        DefaultFacility: =If(IsBlank(ParamFacility),First(MySplashSelectionsCollection).MyFacilityCol,ParamFacility)
+        Fill: =AppSwitcher_1.BackgroundColor
+        Height: =1023
+        OverrideFacilityParam: =Override_Facility_Param
+        PrimaryColor: =varColorPrimary
+        UserLanguage: =_varUserLanguage
+        X: =0
+        Y: =113
+        ZIndex: =1
+
+    CompanyBrand_3 As CompanyBrand:
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =varColorPrimary
+        HeaderImage: =User().Image
+        LinkToMeScreen: =MeScreen
+        Subtitle: ="Response App"
+        Title: =First(MySplashSelectionsCollection).MySystemCol
+        X: =0+0
+        Y: =0
+        ZIndex: =2
+
+    AltCheck_Lbl As label:
+        BorderThickness: =1
+        FocusedBorderColor: =AltCheck_Lbl.BorderColor
+        Height: =70
+        HoverBorderColor: =AltCheck_Lbl.BorderColor
+        HoverColor: =AltCheck_Lbl.Color
+        HoverFill: =AltCheck_Lbl.Fill
+        PressedBorderColor: =AltCheck_Lbl.BorderColor
+        PressedColor: =AltCheck_Lbl.Color
+        PressedFill: =AltCheck_Lbl.Fill
+        Size: =12
+        Text: =Location.Altitude
+        Visible: =false
+        Width: =203
+        X: =40
+        Y: =129
+        ZIndex: =3
+
+    SplashTimer As timer:
+        BorderColor: =ColorFade(SplashTimer.Fill, -15%)
+        DisabledBorderColor: =ColorFade(SplashTimer.BorderColor, 70%)
+        DisabledColor: =ColorFade(SplashTimer.Fill, 90%)
+        DisabledFill: =ColorFade(SplashTimer.Fill, 70%)
+        Duration: =100
+        FocusedBorderColor: =SplashTimer.BorderColor
+        Height: =70
+        HoverBorderColor: =ColorFade(SplashTimer.BorderColor, 20%)
+        OnTimerEnd: =Navigate(SplashScreen,Fade)
+        PressedBorderColor: =SplashTimer.Fill
+        PressedColor: =SplashTimer.Fill
+        PressedFill: =SplashTimer.Color
+        Start: =GotoSplash
+        Text: |-
+            =Text(Time(0, 0, SplashTimer.Value/1000), "hh:mm:ss")
+        Visible: =false
+        Width: =203
+        X: =437
+        Y: =59
+        ZIndex: =4
+

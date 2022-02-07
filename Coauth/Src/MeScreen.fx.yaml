@@ -1,0 +1,167 @@
+MeScreen As screen:
+    Fill: =varColorSecondary
+    Height: =Max(App.Height, App.DesignHeight)
+    Orientation: =If(MeScreen.Width < MeScreen.Height, Layout.Vertical, Layout.Horizontal)
+    Size: =1 + CountRows(App.SizeBreakpoints) - CountIf(App.SizeBreakpoints, Value >= MeScreen.Width)
+    Width: =Max(App.Width, App.DesignWidth)
+
+    Me_MeHeader_Lbl As label:
+        Align: =Center
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =varColorPrimary
+        FocusedBorderColor: =Me_MeHeader_Lbl.BorderColor
+        FontWeight: =Bold
+        Height: =App.DesignHeight*10%
+        HoverBorderColor: =Me_MeHeader_Lbl.BorderColor
+        HoverColor: =Me_MeHeader_Lbl.Color
+        HoverFill: =Me_MeHeader_Lbl.Fill
+        PressedBorderColor: =Me_MeHeader_Lbl.BorderColor
+        PressedColor: =Me_MeHeader_Lbl.Color
+        PressedFill: =Me_MeHeader_Lbl.Fill
+        Size: =21
+        Text: =Substitute(LookUp(resourceStrings, TextID = "UserGreetingText").TextValue, "<Full Name>", User().FullName)
+        Width: =640
+        ZIndex: =2
+
+    Me_AccountBackGround_Lbl As label:
+        Color: =RGBA(255, 255, 255, 1)
+        Fill: =RGBA(255, 255, 255, 1)
+        FocusedBorderColor: =Me_AccountBackGround_Lbl.BorderColor
+        Height: =129
+        HoverBorderColor: =Me_AccountBackGround_Lbl.BorderColor
+        HoverColor: =Me_AccountBackGround_Lbl.Color
+        HoverFill: =Me_AccountBackGround_Lbl.Fill
+        PressedBorderColor: =Me_AccountBackGround_Lbl.BorderColor
+        PressedColor: =Me_AccountBackGround_Lbl.Color
+        PressedFill: =Me_AccountBackGround_Lbl.Fill
+        Size: =21
+        Text: ="Text"
+        Width: =640
+        Y: =Me_MeHeader_Lbl.Y + Me_MeHeader_Lbl.Height
+        ZIndex: =3
+
+    Me_Account_Image As image:
+        FocusedBorderColor: =Me_Account_Image.BorderColor
+        Height: =105
+        HoverBorderColor: =ColorFade(Me_Account_Image.BorderColor, 20%)
+        HoverFill: =ColorFade(Me_Account_Image.Fill, 20%)
+        Image: =User().Image
+        ImagePosition: =ImagePosition.Fill
+        PressedBorderColor: =ColorFade(Me_Account_Image.BorderColor, -20%)
+        PressedFill: =ColorFade(Me_Account_Image.Fill, -20%)
+        RadiusBottomLeft: =90
+        RadiusBottomRight: =90
+        RadiusTopLeft: =90
+        RadiusTopRight: =90
+        Width: =101
+        X: =25
+        Y: =129
+        ZIndex: =4
+
+    Me_AccountName_Lbl As label:
+        FocusedBorderColor: =Me_AccountName_Lbl.BorderColor
+        FontWeight: =Bold
+        Height: =44
+        HoverBorderColor: =Me_AccountName_Lbl.BorderColor
+        HoverColor: =Me_AccountName_Lbl.Color
+        HoverFill: =Me_AccountName_Lbl.Fill
+        PressedBorderColor: =Me_AccountName_Lbl.BorderColor
+        PressedColor: =Me_AccountName_Lbl.Color
+        PressedFill: =Me_AccountName_Lbl.Fill
+        Size: =18
+        Text: =User().FullName
+        Width: =483
+        X: =157
+        Y: =138
+        ZIndex: =5
+
+    Me_AccountEmail_Lbl As label:
+        FocusedBorderColor: =Me_AccountEmail_Lbl.BorderColor
+        Height: =44
+        HoverBorderColor: =Me_AccountEmail_Lbl.BorderColor
+        HoverColor: =Me_AccountEmail_Lbl.Color
+        HoverFill: =Me_AccountEmail_Lbl.Fill
+        PressedBorderColor: =Me_AccountEmail_Lbl.BorderColor
+        PressedColor: =Me_AccountEmail_Lbl.Color
+        PressedFill: =Me_AccountEmail_Lbl.Fill
+        Size: =16
+        Text: =User().Email
+        Width: =483
+        X: =157
+        Y: =174
+        ZIndex: =6
+
+    Me_Signout_Lbl As label:
+        Align: =Center
+        BorderColor: =varColorPrimary
+        BorderThickness: =1
+        Color: =varColorPrimary
+        Fill: =RGBA(255, 255, 255, 1)
+        FocusedBorderColor: =Me_Signout_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Semibold
+        Height: =80
+        HoverBorderColor: =Me_Signout_Lbl.BorderColor
+        HoverColor: =Me_Signout_Lbl.Color
+        HoverFill: =Me_Signout_Lbl.Fill
+        OnSelect: =Exit(true)
+        PressedBorderColor: =Me_Signout_Lbl.BorderColor
+        PressedColor: =Me_Signout_Lbl.Color
+        PressedFill: =Me_Signout_Lbl.Fill
+        Size: =21
+        Text: =LookUp(resourceStrings, TextID = "MeScreenEndShiftButtonText").TextValue
+        Width: =550
+        X: =47
+        Y: =1015
+        ZIndex: =7
+
+    Me_FeedbackBackGround_Lbl As label:
+        Fill: =RGBA(255, 255, 255, 1)
+        FocusedBorderColor: =Me_FeedbackBackGround_Lbl.BorderColor
+        Font: =Font.'Segoe UI'
+        Height: =80
+        HoverBorderColor: =Me_FeedbackBackGround_Lbl.BorderColor
+        HoverColor: =Me_FeedbackBackGround_Lbl.Color
+        HoverFill: =Me_FeedbackBackGround_Lbl.Fill
+        OnSelect: =Navigate(FeedbackScreen,Fade)
+        PaddingLeft: =Me_FeedbackIcon.X + Me_FeedbackIcon.Width + 30
+        PressedBorderColor: =Me_FeedbackBackGround_Lbl.BorderColor
+        PressedColor: =Me_FeedbackBackGround_Lbl.Color
+        PressedFill: =Me_FeedbackBackGround_Lbl.Fill
+        Size: =21
+        Text: =LookUp(resourceStrings, TextID = "MeScreenProvideFeedback").TextValue
+        Width: =640
+        Y: =Me_AccountBackGround_Lbl.Y + Me_AccountBackGround_Lbl.Height + 61
+        ZIndex: =8
+
+    Me_Back_Icon As icon.ArrowLeft:
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledFill: =Me_Back_Icon.Fill
+        FocusedBorderColor: =Me_Back_Icon.BorderColor
+        Height: =49
+        HoverBorderColor: =ColorFade(Me_Back_Icon.BorderColor, 20%)
+        HoverColor: =ColorFade(Me_Back_Icon.Color, 20%)
+        HoverFill: =Me_Back_Icon.Fill
+        Icon: =Icon.ArrowLeft
+        OnSelect: =Back()
+        PressedBorderColor: =ColorFade(Me_Back_Icon.BorderColor, -20%)
+        PressedColor: =ColorFade(Me_Back_Icon.Color, -20%)
+        PressedFill: =Me_Back_Icon.Fill
+        Width: =50
+        X: =40
+        Y: =24
+        ZIndex: =9
+
+    Me_FeedbackIcon As image:
+        FocusedBorderColor: =Me_FeedbackIcon.BorderColor
+        Height: =60
+        HoverBorderColor: =ColorFade(Me_FeedbackIcon.BorderColor, 20%)
+        HoverFill: =ColorFade(Me_FeedbackIcon.Fill, 20%)
+        Image: =Feedback_Icon
+        PressedBorderColor: =ColorFade(Me_FeedbackIcon.BorderColor, -20%)
+        PressedFill: =ColorFade(Me_FeedbackIcon.Fill, -20%)
+        Width: =60
+        X: =60
+        Y: =Me_FeedbackBackGround_Lbl.Y + (Me_FeedbackBackGround_Lbl.Height - Me_FeedbackIcon.Height)/2
+        ZIndex: =10
+

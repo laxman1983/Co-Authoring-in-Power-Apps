@@ -1,0 +1,64 @@
+CompanyBrand As CanvasComponent:
+    Color: =RGBA(0, 0, 0, 1)
+    Fill: =RGBA(0, 18, 107, 1)
+    HeaderImage: =SampleImage
+    Height: =App.DesignHeight*10%
+    LinkToMeScreen: =App.ActiveScreen
+    Margin: =100
+    Subtitle: ="Text"
+    Title: ="Text"
+    Width: =App.DesignWidth
+    X: =40
+    Y: =40
+    ZIndex: =1
+
+    Image1_2 As image:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        DisabledFill: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =Image1_2.BorderColor
+        FocusedBorderThickness: =4
+        Height: =80
+        HoverBorderColor: =RGBA(0, 0, 0, 0)
+        HoverFill: =RGBA(0, 0, 0, 0)
+        Image: =CompanyBrand.HeaderImage
+        ImagePosition: =ImagePosition.Fill
+        OnSelect: =Navigate(CompanyBrand.LinkToMeScreen,Fade)
+        PressedBorderColor: =RGBA(0, 0, 0, 0)
+        PressedFill: =RGBA(0, 0, 0, 0)
+        RadiusBottomLeft: =90
+        RadiusBottomRight: =90
+        RadiusTopLeft: =90
+        RadiusTopRight: =90
+        Width: =79
+        X: =16
+        Y: =17
+        ZIndex: =1
+
+    Label1_5 As label:
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =Label1_5.BorderColor
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =FontWeight.Bold
+        Height: =64
+        HoverBorderColor: =Label1_5.BorderColor
+        HoverColor: =Label1_5.Color
+        HoverFill: =Label1_5.Fill
+        PressedBorderColor: =Label1_5.BorderColor
+        PressedColor: =Label1_5.Color
+        PressedFill: =Label1_5.Fill
+        Size: =33
+        Text: =CompanyBrand.Title
+        Width: =521
+        Wrap: =false
+        X: =107
+        Y: =25
+        ZIndex: =2
+

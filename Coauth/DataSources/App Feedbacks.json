@@ -1,0 +1,141 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_appfeedbacks",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_appfeedback",
+    "MaxGetRowsCount": 500,
+    "Name": "App Feedbacks",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_appfeedback_AsyncOperations": "System Jobs",
+      "msft_appfeedback_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_appfeedback_DuplicateBaseRecord": "Duplicate Records (msft_appfeedback_DuplicateBaseRecord)",
+      "msft_appfeedback_DuplicateMatchingRecord": "Duplicate Records (msft_appfeedback_DuplicateMatchingRecord)",
+      "msft_appfeedback_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_appfeedback_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_appfeedback_ProcessSession": "Process Sessions",
+      "msft_appfeedback_SyncErrors": "Sync Errors",
+      "msft_appfeedbackid": "App Feedback",
+      "msft_feedbackcomments": "Feedback Comments",
+      "msft_feedbacktype": "Feedback Type",
+      "msft_name": "Name",
+      "msft_reviewed": "Reviewed",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "App Feedbacks",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "App Feedbacks (Views)",
+    "Name": "_msft_appfeedback_views",
+    "RelatedEntityName": "App Feedbacks",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "2d908091-ee19-4981-834d-60e78e02a2f3": "Active App Feedbacks",
+      "7e883a14-c001-4b21-8244-efe06f769ad2": "App Feedback Lookup View",
+      "a715f224-5881-4571-be12-0d3f9bcab1ea": "App Feedback Associated View",
+      "c0ffdc9a-114d-46c5-b503-4beeb09aaf80": "Inactive App Feedbacks",
+      "d7d18bd9-2b74-4ad2-822c-d09fcad0da69": "App Feedback Advanced Find View"
+    }
+  },
+  {
+    "DisplayName": "Status (App Feedbacks)",
+    "Name": "msft_appfeedback_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "App Feedbacks"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "App Feedbacks",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (App Feedbacks)",
+    "Name": "msft_appfeedback_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "App Feedbacks"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "App Feedbacks",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Feedback Type (App Feedbacks)",
+    "Name": "msft_msft_appfeedback_feedbacktype",
+    "OptionSetInfoNameMapping": {
+      "299600000": "Issue",
+      "299600001": "Idea",
+      "299600002": "Praise"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_feedbacktype",
+        "OptionSetReferenceEntityName": "App Feedbacks"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "msft_feedbacktype",
+    "RelatedEntityName": "App Feedbacks",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Reviewed (App Feedbacks)",
+    "Name": "msft_msft_appfeedback_reviewed",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_reviewed",
+        "OptionSetReferenceEntityName": "App Feedbacks"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_reviewed",
+    "RelatedEntityName": "App Feedbacks",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,102 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_regions",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_region",
+    "MaxGetRowsCount": 500,
+    "Name": "Regions",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_description": "Description",
+      "msft_effectiveenddate": "Effective End Date",
+      "msft_effectivestartdate": "Effective Start Date",
+      "msft_Facility_Region_msft_Region": "Facilities",
+      "msft_region_AsyncOperations": "System Jobs",
+      "msft_region_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_region_DuplicateBaseRecord": "Duplicate Records (msft_region_DuplicateBaseRecord)",
+      "msft_region_DuplicateMatchingRecord": "Duplicate Records (msft_region_DuplicateMatchingRecord)",
+      "msft_region_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_region_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_region_ProcessSession": "Process Sessions",
+      "msft_region_SyncErrors": "Sync Errors",
+      "msft_regionid": "Region",
+      "msft_regionname": "Region Name",
+      "msft_System": "System",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Regions",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Regions (Views)",
+    "Name": "_msft_region_views",
+    "RelatedEntityName": "Regions",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "1b8bbcfe-d27f-405f-b34e-b7c5d31e788b": "Region Advanced Find View",
+      "2b9be3e5-cc2a-46b7-a29e-3f3867038a4d": "Region Associated View",
+      "7115abd2-23b4-487a-af36-35deab1eb701": "Active Regions",
+      "76aeef27-4e5b-4b20-834e-c00d2f2cd1f5": "Inactive Regions",
+      "c32e7c0d-1ec3-4117-af65-4af96ec85da6": "Region Lookup View"
+    }
+  },
+  {
+    "DisplayName": "Status (Regions)",
+    "Name": "msft_region_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Regions"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Regions",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Regions)",
+    "Name": "msft_region_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Regions"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Regions",
+    "Type": "OptionSetInfo"
+  }
+]

@@ -1,0 +1,35 @@
+ScreenHeader As CanvasComponent:
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =App.DesignHeight*10%
+    Title: ="Text"
+    Width: =App.DesignWidth
+    X: =40
+    Y: =40
+    ZIndex: =1
+
+    lblFacilityName_3 As label:
+        Align: =Center
+        BorderColor: =RGBA(0, 0, 0, 0)
+        BorderStyle: =BorderStyle.None
+        BorderThickness: =2
+        Color: =RGBA(255, 255, 255, 1)
+        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+        FocusedBorderColor: =lblFacilityName_3.BorderColor
+        FocusedBorderThickness: =4
+        Font: =Font.'Segoe UI'
+        FontWeight: =Semibold
+        Height: =Parent.Height
+        HoverBorderColor: =lblFacilityName_3.BorderColor
+        HoverColor: =lblFacilityName_3.Color
+        HoverFill: =lblFacilityName_3.Fill
+        PaddingLeft: =0
+        PressedBorderColor: =lblFacilityName_3.BorderColor
+        PressedColor: =lblFacilityName_3.Color
+        PressedFill: =lblFacilityName_3.Fill
+        Size: =21
+        Text: =ScreenHeader.Title
+        Width: =640
+        X: =
+        Y: =
+        ZIndex: =1
+

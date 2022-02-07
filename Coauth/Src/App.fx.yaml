@@ -1,0 +1,177 @@
+App As appinfo:
+    BackEnabled: =false
+    MinScreenHeight: =320
+    MinScreenWidth: =320
+    OnStart: |-
+        =Set(Override_Facility_Param,false);
+        Set(_varUserLanguage, Language());
+        // Please find the startup actions in the OnVisible property of the first screen.
+        
+        ////////////
+        /* STYLES */
+        ////////////
+        
+        ClearCollect(
+            AppConfig,
+            ForAll(
+                'App Configs',
+                {
+                    Logo: 'Logo Icon',
+                    PrimaryColor: 'Primary Color',
+                    SecondaryColor: 'Secondary Color'
+                }
+            )
+        );
+        
+        Set(appConfiguration, First(AppConfig));
+        
+        ClearCollect(colStyles,
+            {Key: "navigation_transition", Value: ScreenTransition.None},
+           // {Key: "text_align", Value: If(varString.Align="Left",Align.Left,Align.Right)},
+            {Key: "colorPrimary", Value: appConfiguration.PrimaryColor},
+            {Key: "colorSecondary", Value: appConfiguration.SecondaryColor}
+            
+            // Template of a Key/Value pair.
+            // {Key: "", Value: "", Integer: 0, Image: SampleImage}
+        );
+        
+        // Get the primary color.
+        Set(varColorPrimary,ColorValue(LookUp(colStyles,Key="colorPrimary").Value));
+        
+        // Get the secondary color.
+        Set(varColorSecondary,ColorValue(LookUp(colStyles,Key="colorSecondary").Value));
+        
+        // Get the color of text on a dark background.
+        Set(varColorOnDark,RGBA(255, 255, 255, 1));
+        Set(varColorOnLight,RGBA(0, 0, 0, 1));
+        
+        // Get the color of the menu icons.
+        Set(varColorMenuIcon,"#0070a9");
+        
+        // Get the styles for a form.
+        Set(varFormStyle,
+            {
+                DataCard: {
+                    Height: 50
+                },
+                Title: {
+                    Height: 50,
+                    Size: 21,
+                    Color: varColorOnLight
+                },
+                Control: {
+                    Height: 50,
+                    Size: 18
+                },
+                Label: {
+                    Size: 16,
+                    Color: varColorOnLight
+                }
+            }
+        );
+        
+        ///////////////
+        /* BEGIN: Scripts for AppSwitcher Component */
+        ///////////////
+        
+        //// Change ThisAppName to your app name (Make sure to use the name exist in the App entity for your app)
+        Set(ThisAppName, "Emergency Response App - Staffing needs");
+        ///// Change ThisAppStartScreen to your app main screen
+        Set(ThisAppStartScreen, LaborPoolRequestScreen);
+        
+        ClearCollect(
+            colCategory,
+            ForAll('App Categories',
+                {
+                    col_CategoryId: 'Category Id',
+                    col_CategoryName: Name
+                }));
+        
+        ClearCollect(
+            colNav,
+            ForAll(
+                Sort(
+                Filter(
+                    Apps,
+                    'Hide App from Menu' = 'Hide App from Menu (Apps)'.No
+                )
+                , msft_appdisplayrank, Ascending),
+                {
+                    DisplayName: msft_displayname,
+                    Image: msft_appiconurl,
+                    AppName: msft_appname,
+                    Screen: If(
+                        msft_appname = ThisAppName,
+                        ThisAppStartScreen
+                    ),
+                    PowerAppID: msft_powerappid,
+                    TrackingLevel: msft_trackinglevel,
+                    CategoryRank: If(IsBlank(msft_appcategory), 1, msft_appcategory.msft_categoryrank),
+                    CategoryName: If(IsBlank(msft_appcategory), LookUp(colCategory, col_CategoryId = "Category-Hospital").col_CategoryName, LookUp(colCategory, col_CategoryId = msft_appcategory.'Category Id').col_CategoryName),
+                    CategoryId: If(IsBlank(msft_appcategory), "Category-Hospital", msft_appcategory.msft_categoryid),
+                    URL: msft_launchurl
+                }
+            )
+        );
+        Set(ThisAppDisplayName, LookUp(colNav, AppName = ThisAppName, DisplayName));
+        Set(varTrackingLevel, LookUp(colNav, DisplayName = ThisAppDisplayName, TrackingLevel));
+        
+        ClearCollect(
+            FacilitiesList,
+            ForAll(
+                Facilities,
+                {
+                    Name: 'Facility Name',
+                    Id: Facility
+                }
+            )
+        );
+        If(
+            Not IsBlank(Param("FacilityID")),
+            Set(ParamFacility,
+                LookUp(
+                    FacilitiesList,
+                    Id = GUID(Param("FacilityID"))
+                ).Name
+            );
+            Navigate(ThisAppStartScreen, Transition.None)
+        );
+        ///////////////
+        /* END: Scripts for AppSwitcher Component */
+        ///////////////
+        
+        /*START: Scripts for Language Strings*/
+        
+        
+        ClearCollect(foundResourceStrings, 
+            DropColumns(
+                AddColumns(
+                    ShowColumns(
+                        Filter('Canvas App String Values', 
+                            (msft_languagetag.msft_languagetag = _varUserLanguage || msft_languagetag.msft_languagetag = Left( _varUserLanguage, 2 ))
+                        ),
+                        "msft_languagetag", "msft_defaulttext", "msft_overridetext", "msft_canvasappstring"
+                    ),
+                    "FoundTextID", msft_canvasappstring.msft_textid,"LanguageTag", msft_languagetag.msft_languagetag, "TextValue", If(IsBlank(msft_overridetext), msft_defaulttext, msft_overridetext)
+                ),
+                "msft_canvasappstring", "msft_defaulttext", "msft_languagetag", "msft_overridetext"
+            )
+        );
+        
+        // load strings collection with expected string identifiers
+        ClearCollect(resourceStrings, 
+            AddColumns(AppStringsTable.TextID, 
+                "FoundTextID", LookUp(foundResourceStrings, FoundTextID = TextID, FoundTextID), 
+                "LanguageTag", LookUp(foundResourceStrings, FoundTextID = TextID, LanguageTag), 
+                "TextValue", If(IsBlank(LookUp(foundResourceStrings, FoundTextID = TextID, TextValue)), 
+                    LookUp(StringsOOB, TextID = OOBTextID && (LanguageTag = _varUserLanguage || LanguageTag = Left( _varUserLanguage, 2 ) || IsBlank(LanguageTag))).LocalizedText, 
+                    LookUp(foundResourceStrings, FoundTextID = TextID, TextValue))
+                )
+        );
+        
+        Clear(foundResourceStrings);
+        
+        
+        
+        /*END: Scripts for Language Strings*/
+

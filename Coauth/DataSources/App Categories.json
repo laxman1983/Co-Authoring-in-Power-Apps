@@ -1,0 +1,100 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_appcategories",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_appcategory",
+    "MaxGetRowsCount": 500,
+    "Name": "App Categories",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_App_appcategory_msft_appcategory": "Apps",
+      "msft_appcategory_AsyncOperations": "System Jobs",
+      "msft_appcategory_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_appcategory_DuplicateBaseRecord": "Duplicate Records (msft_appcategory_DuplicateBaseRecord)",
+      "msft_appcategory_DuplicateMatchingRecord": "Duplicate Records (msft_appcategory_DuplicateMatchingRecord)",
+      "msft_appcategory_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_appcategory_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_appcategory_ProcessSession": "Process Sessions",
+      "msft_appcategory_SyncErrors": "Sync Errors",
+      "msft_appcategoryid": "App Category",
+      "msft_categoryid": "Category Id",
+      "msft_categoryrank": "Category Rank",
+      "msft_name": "Name",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "App Categories",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "App Categories (Views)",
+    "Name": "_msft_appcategory_views",
+    "RelatedEntityName": "App Categories",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "5bf8699e-0017-4ef6-9af0-db296ac110d4": "Inactive App Categories",
+      "a86c775b-c3f6-488b-8f2e-88f605f4d621": "Active App Categories",
+      "b6812966-15eb-4656-a210-9957c2f070ea": "App Category Advanced Find View",
+      "b7df115b-dada-4700-ba44-a350bfd52a78": "App Category Lookup View",
+      "ee9c696e-186f-4e2d-b96a-ca524e7ddd2b": "App Category Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (App Categories)",
+    "Name": "msft_appcategory_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "App Categories"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "App Categories",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (App Categories)",
+    "Name": "msft_appcategory_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "App Categories"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "App Categories",
+    "Type": "OptionSetInfo"
+  }
+]

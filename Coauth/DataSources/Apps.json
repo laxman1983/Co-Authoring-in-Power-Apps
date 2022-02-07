@@ -1,0 +1,148 @@
+[
+  {
+    "CdsFCBContext": "{\"FileType\":true,\"ImageExternalStorage\":true}",
+    "EntitySetName": "msft_apps",
+    "IsHidden": false,
+    "IsSampleData": false,
+    "IsWritable": true,
+    "LogicalName": "msft_app",
+    "MaxGetRowsCount": 500,
+    "Name": "Apps",
+    "NativeCDSDataSourceInfoNameMapping": {
+      "_ownerid_value": "Owner",
+      "cr558_appiconsvg": "App Icon Base SVG",
+      "createdby": "Created By",
+      "createdon": "Created On",
+      "createdonbehalfby": "Created By (Delegate)",
+      "importsequencenumber": "Import Sequence Number",
+      "modifiedby": "Modified By",
+      "modifiedon": "Modified On",
+      "modifiedonbehalfby": "Modified By (Delegate)",
+      "msft_app_AsyncOperations": "System Jobs",
+      "msft_app_BulkDeleteFailures": "Bulk Delete Failures",
+      "msft_app_DuplicateBaseRecord": "Duplicate Records (msft_app_DuplicateBaseRecord)",
+      "msft_app_DuplicateMatchingRecord": "Duplicate Records (msft_app_DuplicateMatchingRecord)",
+      "msft_app_MailboxTrackingFolders": "Mailbox Auto Tracking Folders",
+      "msft_app_PrincipalObjectAttributeAccesses": "Field Sharing",
+      "msft_app_ProcessSession": "Process Sessions",
+      "msft_app_SyncErrors": "Sync Errors",
+      "msft_appcategory": "Category",
+      "msft_appdisplayrank": "App Display Rank",
+      "msft_appiconurl": "App Icon URL",
+      "msft_appiconurlid": "msft_AppIconURLId",
+      "msft_appid": "App",
+      "msft_appname": "App Name",
+      "msft_description": "Description",
+      "msft_displayname": "Display Name",
+      "msft_launchurl": "Launch URL",
+      "msft_mainlaunchapp": "Hide App from Menu",
+      "msft_powerappid": "Power App ID",
+      "msft_trackinglevel": "Tracking Level",
+      "overriddencreatedon": "Record Created On",
+      "owningbusinessunit": "Owning Business Unit",
+      "owningteam": "Owning Team",
+      "owninguser": "Owning User",
+      "statecode": "Status",
+      "statuscode": "Status Reason",
+      "timezoneruleversionnumber": "Time Zone Rule Version Number",
+      "utcconversiontimezonecode": "UTC Conversion Time Zone Code",
+      "versionnumber": "Version Number"
+    },
+    "PreferredName": "Apps",
+    "Type": "NativeCDSDataSourceInfo"
+  },
+  {
+    "DisplayName": "Apps (Views)",
+    "Name": "_msft_app_views",
+    "RelatedEntityName": "Apps",
+    "TrimmedViewName": true,
+    "Type": "ViewInfo",
+    "ViewInfoNameMapping": {
+      "32cfca97-db03-4177-8efc-d39179eaa38b": "App Advanced Find View",
+      "806ba7a4-cb81-4920-b2b1-19c1324c6d91": "Active Apps",
+      "a0c50e8f-c4c1-48cf-87fd-11c76a5478fd": "Inactive Apps",
+      "ab7566bb-edec-4008-bc5c-48f6bdb751a2": "App Lookup View",
+      "e957c5fc-c931-405e-9870-47f433be1024": "App Associated View"
+    }
+  },
+  {
+    "DisplayName": "Status (Apps)",
+    "Name": "msft_app_statecode",
+    "OptionSetInfoNameMapping": {
+      "0": "Active",
+      "1": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statecode",
+        "OptionSetReferenceEntityName": "Apps"
+      }
+    },
+    "OptionSetTypeKey": "StateType",
+    "RelatedColumnInvariantName": "statecode",
+    "RelatedEntityName": "Apps",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Status Reason (Apps)",
+    "Name": "msft_app_statuscode",
+    "OptionSetInfoNameMapping": {
+      "1": "Active",
+      "2": "Inactive"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "statuscode",
+        "OptionSetReferenceEntityName": "Apps"
+      }
+    },
+    "OptionSetTypeKey": "StatusType",
+    "RelatedColumnInvariantName": "statuscode",
+    "RelatedEntityName": "Apps",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Hide App from Menu (Apps)",
+    "Name": "msft_msft_app_mainlaunchapp",
+    "OptionSetInfoNameMapping": {
+      "0": "No",
+      "1": "Yes"
+    },
+    "OptionSetIsBooleanValued": true,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_mainlaunchapp",
+        "OptionSetReferenceEntityName": "Apps"
+      }
+    },
+    "OptionSetTypeKey": "BooleanType",
+    "RelatedColumnInvariantName": "msft_mainlaunchapp",
+    "RelatedEntityName": "Apps",
+    "Type": "OptionSetInfo"
+  },
+  {
+    "DisplayName": "Tracking Level (Apps)",
+    "Name": "msft_msft_app_trackinglevel",
+    "OptionSetInfoNameMapping": {
+      "299600000": "Location",
+      "299600001": "Facility"
+    },
+    "OptionSetIsBooleanValued": false,
+    "OptionSetIsGlobal": false,
+    "OptionSetReference": {
+      "OptionSetReferenceItem0": {
+        "OptionSetReferenceColumnName": "msft_trackinglevel",
+        "OptionSetReferenceEntityName": "Apps"
+      }
+    },
+    "OptionSetTypeKey": "PicklistType",
+    "RelatedColumnInvariantName": "msft_trackinglevel",
+    "RelatedEntityName": "Apps",
+    "Type": "OptionSetInfo"
+  }
+]
