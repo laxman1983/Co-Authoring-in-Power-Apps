@@ -30,7 +30,7 @@ FeedbackScreen As screen:
         Fill: =varColorSecondary
         Height: =Rectangle2_1.Y - (ScreenHeader_2.Y + ScreenHeader_2.Height)
         OnSuccess: |-
-            =    Notify("Your feedback has been submitted successfully", NotificationType.Success, 2000);
+            =    Notify("Your feedback has been submitted successfully new", NotificationType.Success, 2000);
                 ResetForm(FormFeedback);
                 Back();
         Width: =640
