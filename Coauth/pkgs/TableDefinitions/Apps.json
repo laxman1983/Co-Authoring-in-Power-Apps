@@ -1,7 +1,7 @@
 {
   "DatasetName": "default.cds",
   "EntityName": "Apps",
-  "InstanceUrl": "https://org9b7e1323.crm4.dynamics.com/",
+  "InstanceUrl": "https://org9fd9feca.crm.dynamics.com/",
   "LocalReferenceDSJson": {
     "entitySetName": "msft_apps",
     "logicalName": "msft_app"
